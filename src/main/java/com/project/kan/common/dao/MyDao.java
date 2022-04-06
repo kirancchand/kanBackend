@@ -35,4 +35,7 @@ public class MyDao {
 //		return param;
 		return jdbcTemplate.update(SQLSelectorWebService.getQuery(query),param[0],param[1]);
     }
+
+
 }
+
