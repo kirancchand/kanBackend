@@ -14,13 +14,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-
+import static com.project.kan.security.config.Constants.EXPIRATION_TIME;
+import static com.project.kan.security.config.Constants.SECRET_KEY;
 @Component
 public class JwtTokenUtil implements Serializable{
 
 private static final long serialVersionUID = -2550185165626007488L;
 
-public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+//public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
 @Value("${jwt.secret}")
 private String secret;
@@ -42,7 +43,7 @@ return claimsResolver.apply(claims);
 
 //for retrieveing any information from token we will need the secret key
 private Claims getAllClaimsFromToken(String token) {
-return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
 }
 
 //check if the token has expired
@@ -65,15 +66,15 @@ return doGenerateToken(claims, userDetails.getUsername());
 private String doGenerateToken(Map<String, Object> claims, String subject) {
 
 return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-.signWith(SignatureAlgorithm.HS512, secret).compact();
+.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME * 1000))
+.signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
 }
 
-//validate token
-public Boolean validateToken(String token, UserDetails userDetails) {
-final String username = getUsernameFromToken(token);
-return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-}
+	//validate token
+	public Boolean validateToken(String token, UserDetails userDetails) {
+		final String username = getUsernameFromToken(token);
+		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+	}
 
 
 }
