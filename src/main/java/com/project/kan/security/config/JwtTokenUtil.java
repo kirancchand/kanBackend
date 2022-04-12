@@ -70,11 +70,11 @@ return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date
 .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
 }
 
-	//validate token
-	public Boolean validateToken(String token, UserDetails userDetails) {
-		final String username = getUsernameFromToken(token);
-		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-	}
+//validate token
+public Boolean validateToken(String token, UserDetails userDetails) {
+	final String username = getUsernameFromToken(token);
+	return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+}
 
 
 }

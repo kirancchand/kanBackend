@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import static com.project.kan.security.config.Constants.SIGN_IN_URLS;
 import static com.project.kan.security.config.Constants.SIGN_UP_URLS;
 
 @Configuration
@@ -54,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				httpSecurity.cors().and().csrf().disable()
 				
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers(SIGN_UP_URLS).permitAll().
+				.authorizeRequests().antMatchers(SIGN_IN_URLS,SIGN_UP_URLS).permitAll().
+				// "/login","/register"
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
