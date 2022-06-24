@@ -1,6 +1,7 @@
 package com.project.kan.common.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +37,22 @@ public class MyDao {
 		return jdbcTemplate.update(SQLSelectorWebService.getQuery(query),param[0],param[1]);
     }
 
+
+	
+	
+	public <T extends Object> T queryNameForObject(String queryName, Object[] param, Class<T> requiredType) {
+        return jdbcTemplate.queryForObject(SQLSelectorWebService.getQuery(queryName),param, requiredType);
+    }
+	
+	public List<Map<String, Object>> queryNameForList(String query, Object[] paramValues) {
+        return jdbcTemplate.queryForList(SQLSelectorWebService.getQuery(query), paramValues);
+    }
+	
+	public void queryNameForUpdate(String query, Object[] paramValues) {
+		jdbcTemplate.update(SQLSelectorWebService.getQuery(query), paramValues);
+    }
+	
+	
 
 }
 
