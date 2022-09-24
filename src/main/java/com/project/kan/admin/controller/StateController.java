@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.StateService;
 import com.project.kan.admin.vo.State;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/state")
@@ -52,10 +53,10 @@ public class StateController {
 	}
 	@DeleteMapping("/delete/{state_id}")
 	@ResponseBody
-	public void deleteState(@PathVariable("state_id") int state_id)
+	public MasterResponse deleteState(@PathVariable("state_id") int state_id)
 	{
 		
-		stateservice.deleteState(state_id);
+		return stateservice.deleteState(state_id);
 		
 	}
 	@PutMapping("/update/{state_id}")

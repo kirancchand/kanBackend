@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.kan.common.dao.MyDao;
+import com.project.kan.common.vo.MasterResponse;
+import com.project.kan.security.vo.UserResponse;
 import com.project.kan.admin.service.StateService;
 import com.project.kan.admin.vo.State;
 @Service
@@ -18,6 +20,7 @@ public class StateService {
 
 	@Autowired
 	private MyDao mydao;
+	
 	public State saveState(@RequestBody State state)
 	{
 		Long a=mydao.queryForSave("master.state.add",new Object[] {state.getState()});
@@ -42,11 +45,15 @@ public class StateService {
 		
 	}
 	
-	public void deleteState(@PathVariable("state_id") int state_id)
+	public MasterResponse deleteState(@PathVariable("state_id") int state_id)
 	{
 		
 //		 staterepo.deleteById(state_id);
 		mydao.delete("master.state.delete",new Object[]{state_id});
+		MasterResponse masterResponse = new MasterResponse();
+		masterResponse.setMessage("Deleted Successfully!!");
+		masterResponse.setStatus(200);
+		return masterResponse;
 		
 	}
 	public Long updateState(@RequestBody State state,@PathVariable("state_id") int state_id)
