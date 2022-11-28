@@ -40,10 +40,10 @@ public class DistrictService {
 		
 	}
 	
-	public Object getDistrictByState(@PathVariable("state_id") int state_id)
+	public List getDistrictByState(@PathVariable("state_id") int state_id)
 	{
-		Object myObject=mydao.findById("master.district.getByState",new Object[]{state_id},District.class);
-		return myObject;
+	    List<District> byState=mydao.findListById("master.district.getByState",new Object[]{state_id},District.class);
+		return byState;
 		
 	}
 	

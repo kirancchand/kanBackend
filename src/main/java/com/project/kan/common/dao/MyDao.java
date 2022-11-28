@@ -29,6 +29,10 @@ public class MyDao {
 	    return jdbcTemplate.queryForObject(SQLSelectorWebService.getQuery(query),param,new BeanPropertyRowMapper(returnClassType));
 	 }
 	
+	public List findListById(String query,Object[] param, Class returnClassType) {
+        return jdbcTemplate.query(SQLSelectorWebService.getQuery(query),param,new BeanPropertyRowMapper(returnClassType));
+     }
+	
 	public void delete(String query,Object[] param) {
 	     jdbcTemplate.update(SQLSelectorWebService.getQuery(query),param);
 	 }

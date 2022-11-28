@@ -51,11 +51,12 @@ public class DistrictController {
 		
 	}
 	
+	
 	@RequestMapping("/getByState/{state_id}")
 	@ResponseBody
-	public Object getDistrictByState(@PathVariable("state_id") int state_id)
+	public List getDistrictByState(@PathVariable("state_id") int state_id)
 	{
-		
+
 		return districtservice.getDistrictByState(state_id);
 		
 	}
