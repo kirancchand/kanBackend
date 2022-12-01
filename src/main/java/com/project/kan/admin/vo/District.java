@@ -22,7 +22,6 @@ public class District {
 	public void setF_state_id(int f_state_id) {
 		this.f_state_id = f_state_id;
 	}
-	
-	
+		
 
 }

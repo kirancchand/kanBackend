@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.kan.admin.vo.District;
 import com.project.kan.common.dao.MyDao;
+import com.project.kan.common.vo.MasterResponse;
 
 @Service
 public class DistrictService {
@@ -47,11 +48,15 @@ public class DistrictService {
 		
 	}
 	
-	public void deleteDistrict(@PathVariable("district_id") int district_id)
+	public MasterResponse deleteDistrict(@PathVariable("district_id") int district_id)
 	{
 		
 //		 districtrepo.deleteById(district_id);
 		mydao.delete("master.district.delete",new Object[]{district_id});
+		MasterResponse masterResponse = new MasterResponse();
+		masterResponse.setMessage("Deleted Successfully!!");
+		masterResponse.setStatus(200);
+		return masterResponse;
 		
 	}
 	
