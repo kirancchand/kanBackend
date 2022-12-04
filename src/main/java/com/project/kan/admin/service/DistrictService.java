@@ -41,7 +41,7 @@ public class DistrictService {
 		
 	}
 	
-	public List getDistrictByState(@PathVariable("state_id") int state_id)
+	public List<District> getDistrictByState(@PathVariable("state_id") int state_id)
 	{
 	    List<District> byState=mydao.findListById("master.district.getByState",new Object[]{state_id},District.class);
 		return byState;
