@@ -24,7 +24,7 @@ public class LocalbodytypeService {
 	
 	public Localbodytype saveLocalbodytype(@RequestBody Localbodytype localbodytype)
 	{
-		Long a=mydao.queryForSave("master.localbodytype.add",new Object[] {localbodytype.getLocalbodytype()});
+		Long a=mydao.queryForSave("master.localbodytype.add",new Object[] {localbodytype.getLocalbodytype_name()});
 		if(a!=0)
 			return localbodytype;
 			
@@ -59,7 +59,7 @@ public class LocalbodytypeService {
 	public Long updateLocalbodytype(@RequestBody Localbodytype localbodytype,@PathVariable("localbodytype_id") int localbodytype_id)
 	{
 	
-		long myObject=mydao.queryForUpdate("master.localbodytype.update",new Object[]{localbodytype.getLocalbodytype(),localbodytype_id});
+		long myObject=mydao.queryForUpdate("master.localbodytype.update",new Object[]{localbodytype.getLocalbodytype_name(),localbodytype_id});
 		return myObject;
 		
 	}
