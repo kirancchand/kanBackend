@@ -16,6 +16,7 @@ import com.project.kan.admin.service.StateService;
 import com.project.kan.admin.vo.State;
 @Service
 public class StateService {
+	
 	private static final Logger logger = LoggerFactory.getLogger(StateService.class);
 
 	@Autowired

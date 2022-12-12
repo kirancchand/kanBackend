@@ -14,7 +14,6 @@ import com.project.kan.common.dao.MyDao;
 import com.project.kan.common.vo.MasterResponse;
 
 
-
 @Service
 public class LocalbodytypeService {
 	private static final Logger logger = LoggerFactory.getLogger(LocalbodytypeService.class);

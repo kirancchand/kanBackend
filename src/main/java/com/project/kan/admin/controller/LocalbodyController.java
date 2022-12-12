@@ -78,6 +78,7 @@ public class LocalbodyController {
 		localbodyservice.deleteLocalbody(localbody_id);
 		
 	}
+	
 	@PutMapping("/update/{localbody_id}")
 	@ResponseBody
 	public void updateLocalbody(@RequestBody Localbody localbody, @PathVariable("localbody_id") int localbody_id)
