@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.kan.admin.service.UserService;
-import com.project.kan.admin.vo.User;
+import com.project.kan.admin.service.UsertableService;
+import com.project.kan.admin.vo.Usertable;
 
 @RestController
-@RequestMapping("/master/user")
-public class UserController {
+@RequestMapping("/master/usertable")
+public class UsertableController {
 	
 	@Autowired
-    private UserService userservice;
+    private UsertableService usertableservice;
 
     @RequestMapping("/index")
     @ResponseBody
@@ -29,17 +29,17 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public User addUser(@RequestBody User user)
+    public Usertable addUser(@RequestBody Usertable usertable)
     {
-        return userservice.saveUser(user);
+        return usertableservice.saveUser(usertable);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<User> getAllUser()
+	public List<Usertable> getAllUser()
 	{
 		
-		return userservice.getAllUser();
+		return usertableservice.getAllUser();
 		
 	}
 	@RequestMapping("/get/{id}")
@@ -47,7 +47,7 @@ public class UserController {
 	public Object getUser(@PathVariable("id") int id)
 	{
 		
-		return userservice.getUser(id);
+		return usertableservice.getUser(id);
 		
 	}
 	
@@ -57,14 +57,14 @@ public class UserController {
 	public void deleteUser(@PathVariable("id") int id)
 	{
 		
-		userservice.deleteUser(id);
+		usertableservice.deleteUser(id);
 		
 	}
 	@PutMapping("/update/{id}")
 	@ResponseBody
-	public void updateUser(@RequestBody User user, @PathVariable("id") int id)
+	public void updateUser(@RequestBody Usertable usertable, @PathVariable("id") int id)
 	{
-		 userservice.updateUser(user,id);
+		 usertableservice.updateUser(usertable,id);
 	}
 
 }

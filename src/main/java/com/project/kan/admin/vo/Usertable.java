@@ -1,8 +1,7 @@
 package com.project.kan.admin.vo;
 
-
-public class User {
-
+public class Usertable {
+	
 	private int id;
 	private String email_id;
 	private int f_ward_id;
@@ -60,7 +59,5 @@ public class User {
 	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
-	
-	
-	
+
 }
