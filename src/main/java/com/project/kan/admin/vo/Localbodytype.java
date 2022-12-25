@@ -10,11 +10,11 @@ public class Localbodytype {
 	public void setLocalbodytype_id(int localbodytype_id) {
 		this.localbodytype_id = localbodytype_id;
 	}
-   public String getLocalbodytype_name() {
-        return localbodytype_name;
-    }
-    public void setLocalbodytype_name(String localbodytype_name) {
-        this.localbodytype_name = localbodytype_name;
-    }
-
+	
+	public String getLocalbodytype_name() {
+		return localbodytype_name;
+	}
+	public void setLocalbodytype_name(String localbodytype_name) {
+		this.localbodytype_name = localbodytype_name;
+	}
 }

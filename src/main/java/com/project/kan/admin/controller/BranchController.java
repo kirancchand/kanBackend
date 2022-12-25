@@ -52,7 +52,7 @@ public class BranchController {
 	
 	@RequestMapping("/getByArea/{area_id}")
 	@ResponseBody
-	public Object getBranchByArea(@PathVariable("area_id") int area_id)
+	public List getBranchByArea(@PathVariable("area_id") int area_id)
 	{
 		
 		return branchservice.getBranchByArea(area_id);

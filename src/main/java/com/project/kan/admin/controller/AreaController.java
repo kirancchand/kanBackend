@@ -52,7 +52,7 @@ public class AreaController {
 	
 	@RequestMapping("/getByDistrict/{district_id}")
 	@ResponseBody
-	public Object getAreaByDistrict(@PathVariable("district_id") int district_id)
+	public List getAreaByDistrict(@PathVariable("district_id") int district_id)
 	{
 		
 		return areaservice.getAreaByDistrict(district_id);

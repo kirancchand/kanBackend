@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.project.kan.admin.vo.Branch;
+import com.project.kan.admin.vo.Caste;
 import com.project.kan.common.dao.MyDao;
 
 @Service
@@ -41,10 +42,10 @@ public class BranchService {
 		
 	}
 	
-	public Object getBranchByArea(@PathVariable("area_id") int area_id)
+	public List getBranchByArea(@PathVariable("area_id") int area_id)
 	{
-		Object myObject=mydao.findById("master.branch.getByArea",new Object[]{area_id},Branch.class);
-		return myObject;
+		List<Branch> byArea = mydao.findListById("master.branch.getByArea",new Object[]{area_id},Branch.class);
+        return byArea;
 		
 	}
 	

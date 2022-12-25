@@ -16,6 +16,7 @@ import com.project.kan.admin.service.StateService;
 import com.project.kan.admin.vo.State;
 @Service
 public class StateService {
+	
 	private static final Logger logger = LoggerFactory.getLogger(StateService.class);
 
 	@Autowired
@@ -24,6 +25,7 @@ public class StateService {
 	public State saveState(@RequestBody State state)
 	{
 		Long a=mydao.queryForSave("master.state.add",new Object[] {state.getState()});
+		logger.info("Saving..!"+a);
 		if(a!=0)
 			return state;
 			
@@ -53,6 +55,7 @@ public class StateService {
 		MasterResponse masterResponse = new MasterResponse();
 		masterResponse.setMessage("Deleted Successfully!!");
 		masterResponse.setStatus(200);
+		
 		return masterResponse;
 		
 	}

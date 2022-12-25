@@ -53,8 +53,8 @@ public class LocalbodyService {
 	
 	public List<Localbody> getLocalbodyByLocalbodytype(@PathVariable("f_localbodytype_id") int f_localbodytype_id)
 	{
-	    List<Localbody> byDistrict = mydao.findListById("master.localbody.getByLocalbodytype",new Object[]{f_localbodytype_id},Localbody.class);
-		return byDistrict;
+	    List<Localbody> byLocalbodytype = mydao.findListById("master.localbody.getByLocalbodytype",new Object[]{f_localbodytype_id},Localbody.class);
+		return byLocalbodytype;
 		
 	}
 	

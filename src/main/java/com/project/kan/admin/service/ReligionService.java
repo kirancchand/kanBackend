@@ -23,12 +23,13 @@ public class ReligionService {
 	
 	public Religion saveReligion(@RequestBody Religion religion)
 	{
+//	    return religion;
 		Long a = mydao.queryForSave("master.religion.add",new Object[] {religion.getReligion()});
 		if(a!=0)
 			return religion;
-			
 		else
 			return null;
+		
 		
 	}
 	public List<Religion> getAllReligion()
