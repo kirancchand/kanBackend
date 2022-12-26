@@ -29,22 +29,24 @@ public class BranchService {
 
     public List<Branch> getAllBranch()
 	{
-		List<Branch> allBranch=mydao.findAll("master.branch.all",Branch.class);
+		List<Branch> allBranch = mydao.findAll("master.branch.all",Branch.class);
 		 return allBranch;
 		
 	}
 	
 	public Object getBranch(@PathVariable("branch_id") int branch_id)
 	{
+		
 		Object myObject=mydao.findById("master.branch.getById",new Object[]{branch_id},Branch.class);
 		return myObject;
 		
 	}
 	
-	public Object getBranchByArea(@PathVariable("area_id") int area_id)
+	public List<Branch> getBranchByArea(@PathVariable("area_id") int area_id)
 	{
-		Object myObject=mydao.findById("master.branch.getByArea",new Object[]{area_id},Branch.class);
-		return myObject;
+		
+		List<Branch> branchByArea = mydao.findListById("master.branch.getByArea",new Object[]{area_id},Branch.class);
+		return branchByArea;
 		
 	}
 	
