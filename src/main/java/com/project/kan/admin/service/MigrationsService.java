@@ -21,23 +21,35 @@ public class MigrationsService {
     @Autowired
     private MyDao mydao;
     
-    public Migrations saveMigrations(@RequestBody Migrations migrations)
+    public MasterResponse saveMigrations(@RequestBody Migrations migrations)
     {
     	
         mydao.queryNameForUpdate("master.migrations.add",new Object[] {migrations.getMigration(), migrations.getBatch()});
-        return migrations;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(migrations);
+        return masterResponse;
     }
 
-    public List<Migrations> getAllMigrations()
+    public MasterResponse getAllMigrations()
 	{
 		List<Migrations> allMigrations = mydao.findAll("master.migrations.all", Migrations.class);
-		 return allMigrations;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allMigrations);
+        return masterResponse;	
 	}
 	
-    public Object getMigrations(@PathVariable("id") int id)
+    public MasterResponse getMigrations(@PathVariable("id") int id)
 	{
 		Object myObject = mydao.findById("master.migrations.getById",new Object[]{id},Migrations.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
     
@@ -52,10 +64,15 @@ public class MigrationsService {
 		
 	}
 	
-	public void updateMigrations(@RequestBody Migrations migrations,@PathVariable("id") int id)
+	public MasterResponse updateMigrations(@RequestBody Migrations migrations,@PathVariable("id") int id)
 	{
 	
 		mydao.queryNameForUpdate("master.migrations.update", new Object[]{migrations.getMigration(), migrations.getBatch(), id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(migrations);
+        return masterResponse;
 
 	}
     

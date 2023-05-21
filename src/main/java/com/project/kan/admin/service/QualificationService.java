@@ -21,27 +21,41 @@ public class QualificationService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Qualification saveQualification(@RequestBody Qualification qualification)
+	public MasterResponse saveQualification(@RequestBody Qualification qualification)
 	{
 		Long a = mydao.queryForSave("master.qualification.add",new Object[] {qualification.getQualification()});
-		if(a!=0)
-			return qualification;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(qualification);
+        return masterResponse;
+//		if(a!=0)
+//			return qualification;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Qualification> getAllQualification()
+	public MasterResponse getAllQualification()
 	{
 		List<Qualification> allQualification = mydao.findAll("master.qualification.all",Qualification.class);
-		 return allQualification;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allQualification);
+        return masterResponse;
+
 		
 	}
 	
-	public Object getQualification(@PathVariable("qualification_id") int qualification_id)
+	public MasterResponse getQualification(@PathVariable("qualification_id") int qualification_id)
 	{
 		Object myObject = mydao.findById("master.qualification.getById",new Object[]{qualification_id},Qualification.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -55,11 +69,15 @@ public class QualificationService {
 		return masterResponse;
 		
 	}
-	public Long updateQualification(@RequestBody Qualification qualification,@PathVariable("qualification_id") int qualification_id)
+	public MasterResponse updateQualification(@RequestBody Qualification qualification,@PathVariable("qualification_id") int qualification_id)
 	{
 	
 		long myObject = mydao.queryForUpdate("master.qualification.update",new Object[]{qualification.getQualification(),qualification_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	

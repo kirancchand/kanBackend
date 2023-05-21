@@ -31,14 +31,14 @@ public class StaffController {
 	}
 
 	@PostMapping("/add")
-	public Staff addStaff(@RequestBody Staff staff)
+	public MasterResponse addStaff(@RequestBody Staff staff)
 	{
 		return staffService.saveStaff(staff);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Staff> getAllStaff()
+	public MasterResponse getAllStaff()
 	{
 		
 		return staffService.getAllStaff();
@@ -47,7 +47,7 @@ public class StaffController {
 	
 	@RequestMapping("/get/{staff_id}")
 	@ResponseBody
-	public Object getStaff(@PathVariable("staff_id") int staff_id)
+	public MasterResponse getStaff(@PathVariable("staff_id") int staff_id)
 	{
 		
 		return staffService.getStaff(staff_id);
@@ -65,7 +65,7 @@ public class StaffController {
 	
 	@PutMapping("/update/{staff_id}")
 	@ResponseBody
-	public Long updateStaff(@RequestBody Staff staff,@PathVariable("staff_id") int staff_id)
+	public MasterResponse updateStaff(@RequestBody Staff staff,@PathVariable("staff_id") int staff_id)
 	{
 		return staffService.updateStaff(staff,staff_id);
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.OrganisationmemberService;
 import com.project.kan.admin.vo.Organisationmember;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class OrganisationmemberController {
     }
 
     @PostMapping("/add")
-    public Organisationmember addOrganisationmember(@RequestBody Organisationmember organisationmember)
+    public MasterResponse addOrganisationmember(@RequestBody Organisationmember organisationmember)
     {
         return organisationmemberservice.saveOrganisationmember(organisationmember);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Organisationmember> getAllOrganisationmember()
+	public MasterResponse getAllOrganisationmember()
 	{
 
 		return organisationmemberservice.getAllOrganisationmember();
@@ -45,7 +46,7 @@ public class OrganisationmemberController {
 	}
 	@RequestMapping("/get/{organisation_member_id}")
 	@ResponseBody
-	public Object getOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
+	public MasterResponse getOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
 	{
 
 		return organisationmemberservice.getOrganisationmember(organisation_member_id);
@@ -55,17 +56,17 @@ public class OrganisationmemberController {
 
 	@DeleteMapping("/delete/{organisation_member_id}")
 	@ResponseBody
-	public void deleteOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
+	public MasterResponse deleteOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
 	{
 
-		organisationmemberservice.deleteOrganisationmember(organisation_member_id);
+		return organisationmemberservice.deleteOrganisationmember(organisation_member_id);
 
 	}
 	@PutMapping("/update/{organisation_member_id}")
 	@ResponseBody
-	public void updateOrganisationmember(@RequestBody Organisationmember organisationmember, @PathVariable("organisation_member_id") int organisation_member_id)
+	public MasterResponse updateOrganisationmember(@RequestBody Organisationmember organisationmember, @PathVariable("organisation_member_id") int organisation_member_id)
 	{
-		 organisationmemberservice.updateOrganisationmember(organisationmember, organisation_member_id);
+		 return organisationmemberservice.updateOrganisationmember(organisationmember, organisation_member_id);
 	}
 
 }

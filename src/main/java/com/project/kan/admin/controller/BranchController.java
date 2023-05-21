@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.BranchService;
 import com.project.kan.admin.vo.Branch;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/branch")
@@ -28,14 +29,14 @@ public class BranchController {
     }
 
     @PostMapping("/add")
-    public Branch addBranch(@RequestBody Branch branch)
+    public MasterResponse addBranch(@RequestBody Branch branch)
     {
         return branchservice.saveBranch(branch);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Branch> getAllBranch()
+	public MasterResponse getAllBranch()
 	{
 		
 		return branchservice.getAllBranch();
@@ -43,7 +44,7 @@ public class BranchController {
 	}
 	@RequestMapping("/get/{branch_id}")
 	@ResponseBody
-	public Object getBranch(@PathVariable("branch_id") int branch_id)
+	public MasterResponse getBranch(@PathVariable("branch_id") int branch_id)
 	{
 		
 		return branchservice.getBranch(branch_id);
@@ -52,7 +53,7 @@ public class BranchController {
 	
 	@RequestMapping("/getByArea/{area_id}")
 	@ResponseBody
-	public List getBranchByArea(@PathVariable("area_id") int area_id)
+	public MasterResponse getBranchByArea(@PathVariable("area_id") int area_id)
 	{
 		
 		return branchservice.getBranchByArea(area_id);
@@ -61,16 +62,16 @@ public class BranchController {
 	
 	@DeleteMapping("/delete/{branch_id}")
 	@ResponseBody
-	public void deleteBranch(@PathVariable("branch_id") int branch_id)
+	public MasterResponse deleteBranch(@PathVariable("branch_id") int branch_id)
 	{
 		
-		branchservice.deleteBranch(branch_id);
+		return branchservice.deleteBranch(branch_id);
 		
 	}
 	@PutMapping("/update/{branch_id}")
 	@ResponseBody
-	public void updateBranch(@RequestBody Branch branch,@PathVariable("branch_id") int branch_id)
+	public MasterResponse updateBranch(@RequestBody Branch branch,@PathVariable("branch_id") int branch_id)
 	{
-		 branchservice.updateBranch(branch,branch_id);
+		 return branchservice.updateBranch(branch,branch_id);
 	}
 }

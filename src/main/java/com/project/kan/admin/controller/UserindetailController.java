@@ -31,14 +31,14 @@ public class UserindetailController {
 	}
 
 	@PostMapping("/add")
-	public Userindetail addUserindetail(@RequestBody Userindetail userindetail)
+	public MasterResponse addUserindetail(@RequestBody Userindetail userindetail)
 	{
 		return userindetailservice.saveUserindetail(userindetail);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Userindetail> getAllUserindetail()
+	public MasterResponse getAllUserindetail()
 	{
 		
 		return userindetailservice.getAllUserindetail();
@@ -46,7 +46,7 @@ public class UserindetailController {
 	}
 	@RequestMapping("/get/{userindetail_id}")
 	@ResponseBody
-	public Object getUserindetail(@PathVariable("userindetail_id") int userindetail_id)
+	public MasterResponse getUserindetail(@PathVariable("userindetail_id") int userindetail_id)
 	{
 		
 		return userindetailservice.getUserindetail(userindetail_id);
@@ -62,7 +62,7 @@ public class UserindetailController {
 	}
 	@PutMapping("/update/{userindetail_id}")
 	@ResponseBody
-	public Long updateUserindetail(@RequestBody Userindetail userindetail,@PathVariable("userindetail_id") int userindetail_id)
+	public MasterResponse updateUserindetail(@RequestBody Userindetail userindetail,@PathVariable("userindetail_id") int userindetail_id)
 	{
 		return userindetailservice.updateUserindetail(userindetail,userindetail_id);
 	}

@@ -21,50 +21,74 @@ public class MenuService {
     @Autowired
     private MyDao mydao;
     
-    public Menu saveMenu(@RequestBody Menu menu)
+    public MasterResponse saveMenu(@RequestBody Menu menu)
     {
     	
         mydao.queryNameForUpdate("master.menu.add",new Object[] {menu.getMenu(), menu.getParent_id(), menu.getController_name(), menu.getIcon(), menu.getPosition(), menu.getF_status_id(), menu.getF_menutype_id()});
-        return menu;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(menu);
+        return masterResponse;
     }
 
-    public List<Menu> getAllMenu()
+    public MasterResponse getAllMenu()
 	{
 		List<Menu> allMenu = mydao.findAll("master.menu.all",Menu.class);
-		 return allMenu;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allMenu);
+        return masterResponse;		
 	}
 	
 
     //Get menu by ID 
-	public Object getMenu(@PathVariable("menu_id") int menu_id)
+	public MasterResponse getMenu(@PathVariable("menu_id") int menu_id)
 	{
 		Object myObject = mydao.findById("master.menu.getById",new Object[]{menu_id},Menu.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
 	//Get menu by PARENT
-	public List<Menu> getMenuByParent(@PathVariable("parent_id") int parent_id)
+	public MasterResponse getMenuByParent(@PathVariable("parent_id") int parent_id)
 	{
 	    List<Menu> byParent = mydao.findListById("master.menu.getByParent",new Object[]{parent_id}, Menu.class);
-		return byParent;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byParent);
+        return masterResponse;
 		
 	}
 	
 	
 	//Get menu by STATUS
-	public List<Menu> getMenuByStatus(@PathVariable("f_status_id") int f_status_id)
+	public MasterResponse getMenuByStatus(@PathVariable("f_status_id") int f_status_id)
 	{
 	    List<Menu> byStatus = mydao.findListById("master.menu.getByStatus",new Object[]{f_status_id},Menu.class);
-		return byStatus;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byStatus);
+        return masterResponse;
 		
 	}
 	
 	//Get menu by MENUTYPE
-	public List<Menu> getMenuByMenutype(@PathVariable("f_menutype_id") int f_menutype_id)
+	public MasterResponse getMenuByMenutype(@PathVariable("f_menutype_id") int f_menutype_id)
 	{
 	    List<Menu> byMenutype = mydao.findListById("master.menu.getByMenutype",new Object[]{f_menutype_id},Menu.class);
-		return byMenutype;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byMenutype);
+        return masterResponse;
 		
 	}
 		
@@ -79,11 +103,15 @@ public class MenuService {
 		
 	}
 	
-	public void updateMenu(@RequestBody Menu menu,@PathVariable("menu_id") int menu_id)
+	public MasterResponse updateMenu(@RequestBody Menu menu,@PathVariable("menu_id") int menu_id)
 	{
 	
 		mydao.queryNameForUpdate("master.menu.update", new Object[]{menu.getMenu_id(),menu.getMenu(), menu.getParent_id(), menu.getController_name(), menu.getIcon(), menu.getPosition(), menu.getF_status_id(), menu.getF_menutype_id()});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(menu);
+        return masterResponse;
 	}
 	
 }

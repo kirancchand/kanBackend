@@ -21,23 +21,35 @@ public class RolemenuprivilegeService {
     @Autowired
     private MyDao mydao;
     
-    public Rolemenuprivilege saveRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege)
+    public MasterResponse saveRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege)
     {
     	
         mydao.queryNameForUpdate("master.rolemenuprivilege.add",new Object[] {rolemenuprivilege.getF_role_menu_id(), rolemenuprivilege.getPrivilege_id()});
-        return rolemenuprivilege;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(rolemenuprivilege);
+        return masterResponse;
     }
 
-    public List<Rolemenuprivilege> getAllRolemenuprivilege()
+    public MasterResponse getAllRolemenuprivilege()
 	{
 		List<Rolemenuprivilege> allRolemenuprivilege = mydao.findAll("master.rolemenuprivilege.all",Rolemenuprivilege.class);
-		 return allRolemenuprivilege;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allRolemenuprivilege);
+        return masterResponse;		
 	}
     
-    public Object getRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
+    public MasterResponse getRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
 	{
 		Object myObject = mydao.findById("master.rolemenuprivilege.getById",new Object[]{role_menu_privilege_id},Rolemenuprivilege.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
     
@@ -52,11 +64,15 @@ public class RolemenuprivilegeService {
 		
 	}
 	
-	public void updateRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege,@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
+	public MasterResponse updateRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege,@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
 	{
 	
 		mydao.queryNameForUpdate("master.rolemenuprivilege.update", new Object[]{rolemenuprivilege.getF_role_menu_id(), rolemenuprivilege.getPrivilege_id(), role_menu_privilege_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(rolemenuprivilege);
+        return masterResponse;
 	}
 
 }

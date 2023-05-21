@@ -22,23 +22,35 @@ public class ProductcategoryService {
     @Autowired
     private MyDao mydao;
     
-    public Productcategory saveProductcategory(@RequestBody Productcategory productcategory)
+    public MasterResponse saveProductcategory(@RequestBody Productcategory productcategory)
     {
     	
         mydao.queryNameForUpdate("master.productcategory.add",new Object[] {productcategory.getF_category_id(), productcategory.getF_product_id(), productcategory.getF_status_id()});
-        return productcategory;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(productcategory);
+        return masterResponse;
     }
 
-    public List<Productcategory> getAllProductcategory()
+    public MasterResponse getAllProductcategory()
 	{
 		List<Productcategory> allProductcategory = mydao.findAll("master.productcategory.all",Productcategory.class);
-		 return allProductcategory;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allProductcategory);
+        return masterResponse;	
 	}
     
-    public Object getProductcategory(@PathVariable("product_category_id") int product_category_id)
+    public MasterResponse getProductcategory(@PathVariable("product_category_id") int product_category_id)
 	{
 		Object myObject = mydao.findById("master.productcategory.getById",new Object[]{product_category_id},Productcategory.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
     
@@ -53,11 +65,15 @@ public class ProductcategoryService {
 		
 	}
 	
-	public void updateProductcategory(@RequestBody Productcategory productcategory,@PathVariable("product_category_id") int product_category_id)
+	public MasterResponse updateProductcategory(@RequestBody Productcategory productcategory,@PathVariable("product_category_id") int product_category_id)
 	{
 	
 		mydao.queryNameForUpdate("master.productcategory.update", new Object[]{productcategory.getF_category_id(), productcategory.getF_product_id(), productcategory.getF_status_id(), product_category_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(productcategory);
+        return masterResponse;
 	}
 	
 }

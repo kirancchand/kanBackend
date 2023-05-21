@@ -21,27 +21,42 @@ public class SubjectService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Subject saveSubject(@RequestBody Subject subject)
+	public MasterResponse saveSubject(@RequestBody Subject subject)
 	{
 		Long a = mydao.queryForSave("master.subject.add",new Object[] {subject.getSubject()});
-		if(a!=0)
-			return subject;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(subject);
+        return masterResponse;
+//		if(a!=0)
+//			return subject;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Subject> getAllSubject()
+	public MasterResponse getAllSubject()
 	{
 		List<Subject> allSubject = mydao.findAll("master.subject.all",Subject.class);
-		 return allSubject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allSubject);
+        return masterResponse;
+	
 		
 	}
 	
-	public Object getSubject(@PathVariable("subject_id") int subject_id)
+	public MasterResponse getSubject(@PathVariable("subject_id") int subject_id)
 	{
 		Object myObject = mydao.findById("master.subject.getById",new Object[]{subject_id},Subject.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+
 		
 	}
 	
@@ -55,11 +70,16 @@ public class SubjectService {
 		return masterResponse;
 		
 	}
-	public Long updateSubject(@RequestBody Subject subject,@PathVariable("subject_id") int subject_id)
+	public MasterResponse updateSubject(@RequestBody Subject subject,@PathVariable("subject_id") int subject_id)
 	{
 	
 		long myObject = mydao.queryForUpdate("master.subject.update",new Object[]{subject.getSubject(),subject_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(subject);
+        return masterResponse;
+
 		
 	}
 

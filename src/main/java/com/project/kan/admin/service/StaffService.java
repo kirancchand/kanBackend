@@ -22,28 +22,41 @@ public class StaffService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Staff saveStaff(@RequestBody Staff staff)
+	public MasterResponse saveStaff(@RequestBody Staff staff)
 	{
 		Long a=mydao.queryForSave("master.staff.add",new Object[] {staff.getF_user_id()});
-		if(a!=0)
-			return staff;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(staff);
+        return masterResponse;
+//		if(a!=0)
+//			return staff;
+//			
+//		else
+//			return null;
 		
 	}
 	
-	public List<Staff> getAllStaff()
+	public MasterResponse getAllStaff()
 	{
 		List<Staff> allStaff = mydao.findAll("master.staff.all",Staff.class);
-		 return allStaff;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allStaff);
+        return masterResponse;
 		
 	}
 	
-	public Object getStaff(@PathVariable("staff_id") int staff_id)
+	public MasterResponse getStaff(@PathVariable("staff_id") int staff_id)
 	{
 		Object myObject = mydao.findById("master.staff.getById",new Object[]{staff_id},Staff.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -57,11 +70,15 @@ public class StaffService {
 		return masterResponse;
 		
 	}
-	public Long updateStaff(@RequestBody Staff staff,@PathVariable("staff_id") int staff_id)
+	public MasterResponse updateStaff(@RequestBody Staff staff,@PathVariable("staff_id") int staff_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.staff.update",new Object[]{staff.getF_user_id(),staff_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(staff);
+        return masterResponse;
 		
 	}
 	

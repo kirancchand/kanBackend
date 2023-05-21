@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.CategoryService;
 import com.project.kan.admin.vo.Category;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -31,7 +32,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/add")
-	public Category addCategory(@RequestBody Category category)
+	public MasterResponse addCategory(@RequestBody Category category)
 	{
 		return categoryservice.saveCategory(category);
 	}
@@ -39,7 +40,7 @@ public class CategoryController {
 	
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Category> getAllCategory()
+	public MasterResponse getAllCategory()
 	{
 		
 		return categoryservice.getAllCategory();
@@ -47,7 +48,7 @@ public class CategoryController {
 	}
 	@RequestMapping("/get/{category_id}")
 	@ResponseBody
-	public Object getCategory(@PathVariable("category_id") int category_id)
+	public MasterResponse getCategory(@PathVariable("category_id") int category_id)
 	{
 		
 		return categoryservice.getCategory(category_id);
@@ -57,17 +58,17 @@ public class CategoryController {
 	
 	@DeleteMapping("/delete/{category_id}")
 	@ResponseBody
-	public void deleteCategory(@PathVariable("category_id") int category_id)
+	public MasterResponse deleteCategory(@PathVariable("category_id") int category_id)
 	{
 		
-		categoryservice.deleteCategory(category_id);
+		return categoryservice.deleteCategory(category_id);
 		
 	}
 	@PutMapping("/update/{category_id}")
 	@ResponseBody
-	public void updateCategory(@RequestBody Category category,@PathVariable("category_id") int category_id)
+	public MasterResponse updateCategory(@RequestBody Category category,@PathVariable("category_id") int category_id)
 	{
-		 categoryservice.updateCategory(category,category_id);
+		 return categoryservice.updateCategory(category,category_id);
 	}
 
 	

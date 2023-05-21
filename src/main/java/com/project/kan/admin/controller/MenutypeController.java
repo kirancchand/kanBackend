@@ -31,14 +31,14 @@ public class MenutypeController {
 	}
 
 	@PostMapping("/add")
-	public Menutype addMenutype(@RequestBody Menutype menutype)
+	public MasterResponse addMenutype(@RequestBody Menutype menutype)
 	{
 		return menutypeservice.saveMenutype(menutype);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Menutype> getAllMenutype()
+	public MasterResponse getAllMenutype()
 	{
 		
 		return menutypeservice.getAllMenutype();
@@ -46,7 +46,7 @@ public class MenutypeController {
 	}
 	@RequestMapping("/get/{menutype_id}")
 	@ResponseBody
-	public Object getMenutype(@PathVariable("menutype_id") int menutype_id)
+	public MasterResponse getMenutype(@PathVariable("menutype_id") int menutype_id)
 	{
 		
 		return menutypeservice.getMenutype(menutype_id);
@@ -62,7 +62,7 @@ public class MenutypeController {
 	}
 	@PutMapping("/update/{menutype_id}")
 	@ResponseBody
-	public Long updateMenutype(@RequestBody Menutype menutype,@PathVariable("menutype_id") int menutype_id)
+	public MasterResponse updateMenutype(@RequestBody Menutype menutype,@PathVariable("menutype_id") int menutype_id)
 	{
 		return menutypeservice.updateMenutype(menutype,menutype_id);
 	}

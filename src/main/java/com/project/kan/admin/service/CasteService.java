@@ -21,31 +21,47 @@ public class CasteService {
     @Autowired
     private MyDao mydao;
 
-    public Caste saveCaste(@RequestBody Caste caste)
+    public MasterResponse saveCaste(@RequestBody Caste caste)
     {
     	
         mydao.queryNameForUpdate("master.caste.add",new Object[] {caste.getCaste(),caste.getF_religion_id()});
-        return caste;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(caste);
+        return masterResponse;
     }
 
-    public List<Caste> getAllCaste()
+    public MasterResponse getAllCaste()
 	{
 		List<Caste> allCaste = mydao.findAll("master.caste.all", Caste.class);
-		 return allCaste;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allCaste);
+        return masterResponse;
 		
 	}
 	
-	public Object getCaste(@PathVariable("caste_id") int caste_id)
+	public MasterResponse getCaste(@PathVariable("caste_id") int caste_id)
 	{
 		Object myObject = mydao.findById("master.caste.getById",new Object[]{caste_id},Caste.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+		return masterResponse;
 		
 	}
 	
-	public List getCasteByReligion(@PathVariable("religion_id") int religion_id)
+	public MasterResponse getCasteByReligion(@PathVariable("religion_id") int religion_id)
 	{
 	    List<Caste> byReligion = mydao.findListById("master.caste.getByReligion",new Object[]{religion_id},Caste.class);
-		return byReligion;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byReligion);
+		return masterResponse;
 		
 	}
 	
@@ -61,12 +77,15 @@ public class CasteService {
 		
 	}
 	
-	public void updateCaste(@RequestBody Caste caste,@PathVariable("caste_id") int caste_id)
+	public MasterResponse updateCaste(@RequestBody Caste caste,@PathVariable("caste_id") int caste_id)
 	{
 	
 		mydao.queryNameForUpdate("master.caste.update",new Object[]{caste.getCaste(),caste.getF_religion_id(),caste_id});
-//		return myObject;
-//		return district.getCaste();
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(caste);
+        return masterResponse;
 		
 	}
 

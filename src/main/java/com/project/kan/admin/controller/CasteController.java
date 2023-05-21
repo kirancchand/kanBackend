@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.CasteService;
 import com.project.kan.admin.vo.Caste;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/caste")
@@ -29,14 +30,14 @@ public class CasteController {
     }
 
     @PostMapping("/add")
-    public Caste addCaste(@RequestBody Caste caste)
+    public MasterResponse addCaste(@RequestBody Caste caste)
     {
         return casteservice.saveCaste(caste);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Caste> getAllCaste()
+	public MasterResponse getAllCaste()
 	{
 		
 		return casteservice.getAllCaste();
@@ -44,7 +45,7 @@ public class CasteController {
 	}
 	@RequestMapping("/get/{caste_id}")
 	@ResponseBody
-	public Object getCaste(@PathVariable("caste_id") int caste_id)
+	public MasterResponse getCaste(@PathVariable("caste_id") int caste_id)
 	{
 		
 		return casteservice.getCaste(caste_id);
@@ -54,7 +55,7 @@ public class CasteController {
 	
 	@RequestMapping("/getByReligion/{religion_id}")
 	@ResponseBody
-	public List getCasteByReligion(@PathVariable("religion_id") int religion_id)
+	public MasterResponse getCasteByReligion(@PathVariable("religion_id") int religion_id)
 	{
 
 		return casteservice.getCasteByReligion(religion_id);
@@ -63,17 +64,17 @@ public class CasteController {
 	
 	@DeleteMapping("/delete/{caste_id}")
 	@ResponseBody
-	public void deleteCaste(@PathVariable("caste_id") int caste_id)
+	public MasterResponse deleteCaste(@PathVariable("caste_id") int caste_id)
 	{
 		
-		casteservice.deleteCaste(caste_id);
+		return casteservice.deleteCaste(caste_id);
 		
 	}
 	@PutMapping("/update/{caste_id}")
 	@ResponseBody
-	public void updateCaste(@RequestBody Caste caste,@PathVariable("caste_id") int caste_id)
+	public MasterResponse updateCaste(@RequestBody Caste caste,@PathVariable("caste_id") int caste_id)
 	{
-		 casteservice.updateCaste(caste,caste_id);
+		 return casteservice.updateCaste(caste,caste_id);
 	}
 
 

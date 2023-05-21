@@ -23,27 +23,40 @@ public class UsertypeService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Usertype saveUsertype(@RequestBody Usertype usertype)
+	public MasterResponse saveUsertype(@RequestBody Usertype usertype)
 	{
 		Long a = mydao.queryForSave("master.usertype.add",new Object[] {usertype.getUsertype()});
-		if(a!=0)
-			return usertype;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(usertype);
+        return masterResponse;
+//		if(a!=0)
+//			return usertype;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Usertype> getAllUsertype()
+	public MasterResponse getAllUsertype()
 	{
 		List<Usertype> allUsertype=mydao.findAll("master.usertype.all",Usertype.class);
-		 return allUsertype;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allUsertype);
+        return masterResponse;
 		
 	}
 	
-	public Object getUsertype(@PathVariable("usertype_id") int usertype_id)
+	public MasterResponse getUsertype(@PathVariable("usertype_id") int usertype_id)
 	{
 		Object myObject=mydao.findById("master.usertype.getById",new Object[]{usertype_id},Usertype.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -57,11 +70,16 @@ public class UsertypeService {
 		return masterResponse;
 		
 	}
-	public Long updateUsertype(@RequestBody Usertype usertype,@PathVariable("usertype_id") int usertype_id)
+	public MasterResponse updateUsertype(@RequestBody Usertype usertype,@PathVariable("usertype_id") int usertype_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.usertype.update",new Object[]{usertype.getUsertype(),usertype_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(usertype);
+        return masterResponse;
+
 		
 	}
 }

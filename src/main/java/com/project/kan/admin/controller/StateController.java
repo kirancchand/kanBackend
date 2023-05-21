@@ -30,14 +30,14 @@ public class StateController {
 	}
 
 	@PostMapping("/add")
-	public State addState(@RequestBody State state)
+	public MasterResponse addState(@RequestBody State state)
 	{
 		return stateservice.saveState(state);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<State> getAllState()
+	public MasterResponse getAllState()
 	{
 		
 		return stateservice.getAllState();
@@ -45,7 +45,7 @@ public class StateController {
 	}
 	@RequestMapping("/get/{state_id}")
 	@ResponseBody
-	public Object getState(@PathVariable("state_id") int state_id)
+	public MasterResponse getState(@PathVariable("state_id") int state_id)
 	{
 		
 		return stateservice.getState(state_id);
@@ -61,7 +61,7 @@ public class StateController {
 	}
 	@PutMapping("/update/{state_id}")
 	@ResponseBody
-	public Long updateState(@RequestBody State state,@PathVariable("state_id") int state_id)
+	public MasterResponse updateState(@RequestBody State state,@PathVariable("state_id") int state_id)
 	{
 		return stateservice.updateState(state,state_id);
 	}

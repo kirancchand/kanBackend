@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.EducationService;
 import com.project.kan.admin.vo.Education;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/education")
@@ -29,14 +30,14 @@ public class EducationController {
     }
 
     @PostMapping("/add")
-    public Education addEducation(@RequestBody Education education)
+    public MasterResponse addEducation(@RequestBody Education education)
     {
         return educationservice.saveEducation(education);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Education> getAllEducation()
+	public MasterResponse getAllEducation()
 	{
 		
 		return educationservice.getAllEducation();
@@ -44,7 +45,7 @@ public class EducationController {
 	}
 	@RequestMapping("/get/{education_id}")
 	@ResponseBody
-	public Object getEducation(@PathVariable("education_id") int education_id)
+	public MasterResponse getEducation(@PathVariable("education_id") int education_id)
 	{
 		
 		return educationservice.getEducation(education_id);
@@ -54,17 +55,17 @@ public class EducationController {
 	
 	@DeleteMapping("/delete/{education_id}")
 	@ResponseBody
-	public void deleteEducation(@PathVariable("education_id") int education_id)
+	public MasterResponse deleteEducation(@PathVariable("education_id") int education_id)
 	{
 		
-		educationservice.deleteEducation(education_id);
+		return educationservice.deleteEducation(education_id);
 		
 	}
 	@PutMapping("/update/{education_id}")
 	@ResponseBody
-	public void updateEducation(@RequestBody Education education, @PathVariable("education_id") int education_id)
+	public MasterResponse updateEducation(@RequestBody Education education, @PathVariable("education_id") int education_id)
 	{
-		 educationservice.updateEducation(education,education_id);
+		 return educationservice.updateEducation(education,education_id);
 	}
 	
 }

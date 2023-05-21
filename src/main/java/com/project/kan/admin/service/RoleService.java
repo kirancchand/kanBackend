@@ -22,24 +22,36 @@ public class RoleService {
     @Autowired
     private MyDao mydao;
 
-    public Role saveRole(@RequestBody Role role)
+    public MasterResponse saveRole(@RequestBody Role role)
     {
 
         mydao.queryNameForUpdate("master.role.add",new Object[] {role.getRole()});
-        return role;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(role);
+        return masterResponse;
     }
 
-    public List<Role> getAllRole()
+    public MasterResponse getAllRole()
 	{
 		List<Role> allRole = mydao.findAll("master.role.all",Role.class);
-		 return allRole;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allRole);
+        return masterResponse;
 	}
 
 
-	public Object getRole(@PathVariable("role_id") int role_id)
+	public MasterResponse getRole(@PathVariable("role_id") int role_id)
 	{
 		Object myObject = mydao.findById("master.role.getById",new Object[]{role_id},Role.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 
 	}
 
@@ -55,10 +67,15 @@ public class RoleService {
 
 	}
 
-	public void updateRole(@RequestBody Role role,@PathVariable("role_id") int role_id)
+	public MasterResponse updateRole(@RequestBody Role role,@PathVariable("role_id") int role_id)
 	{
 
 		mydao.queryNameForUpdate("master.role.update", new Object[]{role.getRole(), role_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(role);
+        return masterResponse;
 
 	}
 }

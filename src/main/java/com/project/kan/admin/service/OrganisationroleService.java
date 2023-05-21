@@ -21,27 +21,42 @@ public class OrganisationroleService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Organisationrole saveOrganisationrole(@RequestBody Organisationrole organisationrole)
+	public MasterResponse saveOrganisationrole(@RequestBody Organisationrole organisationrole)
 	{
 		Long a = mydao.queryForSave("master.organisationrole.add",new Object[] {organisationrole.getOrganisation_role()});
-		if(a!=0)
-			return organisationrole;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationrole);
+        return masterResponse;
+//		if(a!=0)
+//			return organisationrole;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Organisationrole> getAllOrganisationrole()
+	public MasterResponse getAllOrganisationrole()
 	{
 		List<Organisationrole> allOrganisationrole = mydao.findAll("master.organisationrole.all",Organisationrole.class);
-		 return allOrganisationrole;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allOrganisationrole);
+        return masterResponse;
+//		 return allOrganisationrole;
 		
 	}
 	
-	public Object getOrganisationrole(@PathVariable("organisation_role_id") int organisation_role_id)
+	public MasterResponse getOrganisationrole(@PathVariable("organisation_role_id") int organisation_role_id)
 	{
 		Object myObject = mydao.findById("master.organisationrole.getById",new Object[]{organisation_role_id},Organisationrole.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+//		return myObject;
 		
 	}
 	
@@ -56,11 +71,15 @@ public class OrganisationroleService {
 		return masterResponse;
 		
 	}
-	public Long updateOrganisationrole(@RequestBody Organisationrole organisationrole,@PathVariable("_organisation_role_id") int organisation_role_id)
+	public MasterResponse updateOrganisationrole(@RequestBody Organisationrole organisationrole,@PathVariable("organisation_role_id") int organisation_role_id)
 	{
 	
 		long myObject = mydao.queryForUpdate("master.organisationrole.update",new Object[]{organisationrole.getOrganisation_role(),organisation_role_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationrole);
+        return masterResponse;
 		
 	}
 	

@@ -21,27 +21,42 @@ public class UserindetailService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Userindetail saveUserindetail(@RequestBody Userindetail userindetail)
+	public MasterResponse saveUserindetail(@RequestBody Userindetail userindetail)
 	{
 		Long a=mydao.queryForSave("master.userindetail.add",new Object[] {userindetail.getF_user_id()});
-		if(a!=0)
-			return userindetail;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(userindetail);
+        return masterResponse;
+//		if(a!=0)
+//			return userindetail;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Userindetail> getAllUserindetail()
+	public MasterResponse getAllUserindetail()
 	{
 		List<Userindetail> allUserindetail=mydao.findAll("master.userindetail.all",Userindetail.class);
-		 return allUserindetail;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allUserindetail);
+        return masterResponse;
+//		 return allUserindetail;
 		
 	}
 	
-	public Object getUserindetail(@PathVariable("userindetail_id") int userindetail_id)
+	public MasterResponse getUserindetail(@PathVariable("userindetail_id") int userindetail_id)
 	{
 		Object myObject=mydao.findById("master.userindetail.getById",new Object[]{userindetail_id},Userindetail.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+//		return myObject;
 		
 	}
 	
@@ -56,11 +71,15 @@ public class UserindetailService {
 		return masterResponse;
 		
 	}
-	public Long updateUserindetail(@RequestBody Userindetail userindetail,@PathVariable("userindetail_id") int userindetail_id)
+	public MasterResponse updateUserindetail(@RequestBody Userindetail userindetail,@PathVariable("userindetail_id") int userindetail_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.userindetail.update",new Object[]{userindetail.getF_user_id(),userindetail_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(userindetail);
+        return masterResponse;
 //		return userindetail.getUserindetail();
 		
 	}

@@ -22,27 +22,40 @@ public class MenutypeService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Menutype saveMenutype(@RequestBody Menutype menutype)
+	public MasterResponse saveMenutype(@RequestBody Menutype menutype)
 	{
 		Long a=mydao.queryForSave("master.menutype.add",new Object[] {menutype.getMenutype()});
-		if(a!=0)
-			return menutype;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(menutype);
+        return masterResponse;
+//		if(a!=0)
+//			return menutype;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Menutype> getAllMenutype()
+	public MasterResponse getAllMenutype()
 	{
 		List<Menutype> allMenutype=mydao.findAll("master.menutype.all",Menutype.class);
-		 return allMenutype;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allMenutype);
+        return masterResponse;
 		
 	}
 	
-	public Object getMenutype(@PathVariable("menutype_id") int menutype_id)
+	public MasterResponse getMenutype(@PathVariable("menutype_id") int menutype_id)
 	{
 		Object myObject=mydao.findById("master.menutype.getById",new Object[]{menutype_id},Menutype.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -56,11 +69,15 @@ public class MenutypeService {
 		return masterResponse;
 		
 	}
-	public Long updateMenutype(@RequestBody Menutype menutype,@PathVariable("menutype_id") int menutype_id)
+	public MasterResponse updateMenutype(@RequestBody Menutype menutype,@PathVariable("menutype_id") int menutype_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.menutype.update",new Object[]{menutype.getMenutype(),menutype_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	

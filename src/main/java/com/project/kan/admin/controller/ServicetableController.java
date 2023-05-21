@@ -31,14 +31,14 @@ public class ServicetableController {
 	}
 
 	@PostMapping("/add")
-	public Servicetable addServicetable(@RequestBody Servicetable servicetable)
+	public MasterResponse addServicetable(@RequestBody Servicetable servicetable)
 	{
 		return servicetableservice.saveServicetable(servicetable);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Servicetable> getAllServicetable()
+	public MasterResponse getAllServicetable()
 	{
 		
 		return servicetableservice.getAllServicetable();
@@ -46,7 +46,7 @@ public class ServicetableController {
 	}
 	@RequestMapping("/get/{service_id}")
 	@ResponseBody
-	public Object getServicetable(@PathVariable("service_id") int service_id)
+	public MasterResponse getServicetable(@PathVariable("service_id") int service_id)
 	{
 		
 		return servicetableservice.getServicetable(service_id);
@@ -62,7 +62,7 @@ public class ServicetableController {
 	}
 	@PutMapping("/update/{service_id}")
 	@ResponseBody
-	public Long updateServicetable(@RequestBody Servicetable servicetable,@PathVariable("service_id") int service_id)
+	public MasterResponse updateServicetable(@RequestBody Servicetable servicetable,@PathVariable("service_id") int service_id)
 	{
 		return servicetableservice.updateServicetable(servicetable,service_id);
 	}

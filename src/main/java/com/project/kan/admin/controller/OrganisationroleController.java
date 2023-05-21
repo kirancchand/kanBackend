@@ -31,14 +31,14 @@ public class OrganisationroleController {
 	}
 
 	@PostMapping("/add")
-	public Organisationrole addOrganisationrole(@RequestBody Organisationrole organisationrole)
+	public MasterResponse addOrganisationrole(@RequestBody Organisationrole organisationrole)
 	{
 		return organisationroleservice.saveOrganisationrole(organisationrole);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Organisationrole> getAllOrganisationrole()
+	public MasterResponse getAllOrganisationrole()
 	{
 		
 		return organisationroleservice.getAllOrganisationrole();
@@ -48,7 +48,7 @@ public class OrganisationroleController {
 
 	@RequestMapping("/get/{organisation_role_id}")
 	@ResponseBody
-	public Object getOrganisationrole(@PathVariable("organisation_role_id") int organisation_role_id)
+	public MasterResponse getOrganisationrole(@PathVariable("organisation_role_id") int organisation_role_id)
 	{
 		
 		return organisationroleservice.getOrganisationrole(organisation_role_id);
@@ -68,7 +68,7 @@ public class OrganisationroleController {
 
 	@PutMapping("/update/{organisation_role_id}")
 	@ResponseBody
-	public Long updateOrganisationrole(@RequestBody Organisationrole organisationrole,@PathVariable("organisation_role_id") int organisation_role_id)
+	public MasterResponse updateOrganisationrole(@RequestBody Organisationrole organisationrole,@PathVariable("organisation_role_id") int organisation_role_id)
 	{
 		return organisationroleservice.updateOrganisationrole(organisationrole,organisation_role_id);
 	}

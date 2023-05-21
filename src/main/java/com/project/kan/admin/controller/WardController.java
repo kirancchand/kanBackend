@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.WardService;
 import com.project.kan.admin.vo.Ward;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/ward")
@@ -29,14 +30,14 @@ public class WardController {
     }
     
     @PostMapping("/add")
-    public Ward addWard(@RequestBody Ward ward)
+    public MasterResponse addWard(@RequestBody Ward ward)
     {
         return wardservice.saveWard(ward);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Ward> getAllWard()
+	public MasterResponse getAllWard()
 	{
 		
 		return wardservice.getAllWard();
@@ -45,7 +46,7 @@ public class WardController {
     
 	@RequestMapping("/get/{ward_id}")
 	@ResponseBody
-	public Object getWard(@PathVariable("ward_id") int ward_id)
+	public MasterResponse getWard(@PathVariable("ward_id") int ward_id)
 	{
 		
 		return wardservice.getWard(ward_id);
@@ -54,7 +55,7 @@ public class WardController {
 	
 	@RequestMapping("/getByLocalbody/{f_localbody_id}")
 	@ResponseBody
-	public Object getWardByLocalbody(@PathVariable("f_localbody_id") int f_localbody_id)
+	public MasterResponse getWardByLocalbody(@PathVariable("f_localbody_id") int f_localbody_id)
 	{
 		
 		return wardservice.getWardByLocalbody(f_localbody_id);
@@ -63,17 +64,17 @@ public class WardController {
 	
 	@DeleteMapping("/delete/{ward_id}")
 	@ResponseBody
-	public void deleteWard(@PathVariable("ward_id") int ward_id)
+	public MasterResponse deleteWard(@PathVariable("ward_id") int ward_id)
 	{
 		
-		wardservice.deleteWard(ward_id);
+		return wardservice.deleteWard(ward_id);
 		
 	}
 	@PutMapping("/update/{ward_id}")
 	@ResponseBody
-	public void updateWard(@RequestBody Ward ward, @PathVariable("wardid") int ward_id)
+	public MasterResponse updateWard(@RequestBody Ward ward, @PathVariable("ward_id") int ward_id)
 	{
-		 wardservice.updateWard(ward,ward_id);
+		 return wardservice.updateWard(ward,ward_id);
 	}
 
 }

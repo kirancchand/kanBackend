@@ -21,31 +21,47 @@ public class OrganisationService {
 	  @Autowired
 	  private MyDao mydao;
 
-	  public Organisation saveOrganisation(@RequestBody Organisation organisation)
+	  public MasterResponse saveOrganisation(@RequestBody Organisation organisation)
 	  {
 
 	      mydao.queryNameForUpdate("master.organisation.add",new Object[] {organisation.getOrganisation(), organisation.getF_organisation_type_id()});
-	      return organisation;
+	      MasterResponse masterResponse = new MasterResponse();
+	        masterResponse.setMessage("Added Successfully!!");
+	        masterResponse.setStatus(200);
+	        masterResponse.setData(organisation);
+	        return masterResponse;
 	  }
 
-	  public List<Organisation> getAllOrganisation()
+	  public MasterResponse getAllOrganisation()
 	{
 	  List<Organisation> allOrganisation = mydao.findAll("master.organisation.all",Organisation.class);
-	   return allOrganisation;
+	  MasterResponse masterResponse = new MasterResponse();
+      masterResponse.setMessage("Listed Successfully!!");
+      masterResponse.setStatus(200);
+      masterResponse.setData(allOrganisation);
+      return masterResponse;
 	}
 
 
-	public Object getOrganisation(@PathVariable("organisation_id") int organisation_id)
+	public MasterResponse getOrganisation(@PathVariable("organisation_id") int organisation_id)
 	{
 	  Object myObject = mydao.findById("master.organisation.getById",new Object[]{organisation_id},Organisation.class);
-	  return myObject;
+	  MasterResponse masterResponse = new MasterResponse();
+      masterResponse.setMessage("Listed Successfully!!");
+      masterResponse.setStatus(200);
+      masterResponse.setData(myObject);
+      return masterResponse;
 
 	}
 
-	public List<Organisation> getOrganisationByOrganisationtype(@PathVariable("f_organisation_type_id") int f_organisation_type_id)
+	public MasterResponse getOrganisationByOrganisationtype(@PathVariable("f_organisation_type_id") int f_organisation_type_id)
 	{
 	    List<Organisation> byOrganisationtype = mydao.findListById("master.organisation.getByOrganisationtype",new Object[]{f_organisation_type_id},Organisation.class);
-	  return byOrganisationtype;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byOrganisationtype);
+        return masterResponse;
 
 	}
 
@@ -61,11 +77,15 @@ public class OrganisationService {
 
 	}
 
-	public void updateOrganisation(@RequestBody Organisation organisation,@PathVariable("organisation_id") int organisation_id)
+	public MasterResponse updateOrganisation(@RequestBody Organisation organisation,@PathVariable("organisation_id") int organisation_id)
 	{
 
 	  mydao.queryNameForUpdate("master.organisation.update", new Object[]{organisation.getOrganisation(), organisation.getF_organisation_type_id(), organisation_id});
-
+	  MasterResponse masterResponse = new MasterResponse();
+      masterResponse.setMessage("Updated Successfully!!");
+      masterResponse.setStatus(200);
+      masterResponse.setData(organisation);
+      return masterResponse;
 	}
 
 }

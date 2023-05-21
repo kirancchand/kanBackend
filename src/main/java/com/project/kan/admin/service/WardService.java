@@ -22,30 +22,46 @@ public class WardService {
     @Autowired
     private MyDao mydao;
     
-    public Ward saveWard(@RequestBody Ward ward)
+    public MasterResponse saveWard(@RequestBody Ward ward)
     {
     	
         mydao.queryNameForUpdate("master.ward.add",new Object[] {ward.getF_localbody_id(), ward.getWard(), ward.getWard_no() });
-        return ward;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(ward);
+        return masterResponse;
     }
 
-    public List<Ward> getAllWard()
+    public MasterResponse getAllWard()
 	{
 		List<Ward> allWard = mydao.findAll("master.ward.all",Ward.class);
-		 return allWard;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allWard);
+        return masterResponse;		
 	}
     
-    public Object getWard(@PathVariable("ward_id") int ward_id)
+    public MasterResponse getWard(@PathVariable("ward_id") int ward_id)
 	{
 		Object myObject = mydao.findById("master.ward.getById",new Object[]{ward_id},Ward.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
     
-    public List<Ward> getWardByLocalbody(@PathVariable("f_localbody_id") int f_localbody_id)
+    public MasterResponse getWardByLocalbody(@PathVariable("f_localbody_id") int f_localbody_id)
 	{
 	    List<Ward> byLocalbody = mydao.findListById("master.localbody.getByLocalbdody",new Object[]{f_localbody_id},Ward.class);
-		return byLocalbody;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byLocalbody);
+        return masterResponse;
 	}
     
     public MasterResponse deleteWard(@PathVariable("ward_id") int ward_id)
@@ -59,11 +75,15 @@ public class WardService {
 		
 	}
 	
-	public void updateWard(@RequestBody Ward ward,@PathVariable("ward_id") int ward_id)
+	public MasterResponse updateWard(@RequestBody Ward ward,@PathVariable("ward_id") int ward_id)
 	{
 	
 		mydao.queryNameForUpdate("master.ward.update", new Object[]{ward.getF_localbody_id(),ward.getWard(),ward.getWard_no(), ward_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(ward);
+        return masterResponse;
 	}
 
 }

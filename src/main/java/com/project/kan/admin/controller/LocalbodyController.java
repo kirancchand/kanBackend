@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.LocalbodyService;
 import com.project.kan.admin.vo.Localbody;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class LocalbodyController {
     }
 
     @PostMapping("/add")
-    public Localbody addLocalbody(@RequestBody Localbody localbody)
+    public MasterResponse addLocalbody(@RequestBody Localbody localbody)
     {
         return localbodyservice.saveLocalbody(localbody);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Localbody> getAllLocalbody()
+	public MasterResponse getAllLocalbody()
 	{
 		
 		return localbodyservice.getAllLocalbody();
@@ -45,7 +46,7 @@ public class LocalbodyController {
 	}
 	@RequestMapping("/get/{localbody_id}")
 	@ResponseBody
-	public Object getLocalbody(@PathVariable("localbody_id") int localbody_id)
+	public MasterResponse getLocalbody(@PathVariable("localbody_id") int localbody_id)
 	{
 		
 		return localbodyservice.getLocalbody(localbody_id);
@@ -54,7 +55,7 @@ public class LocalbodyController {
 	
 	@RequestMapping("/getByDistrict/{f_district_id}")
 	@ResponseBody
-	public Object getLocalbodyByDistrict(@PathVariable("f_district_id") int f_district_id)
+	public MasterResponse getLocalbodyByDistrict(@PathVariable("f_district_id") int f_district_id)
 	{
 		
 		return localbodyservice.getLocalbodyByDistrict(f_district_id);
@@ -63,7 +64,7 @@ public class LocalbodyController {
 	
 	@RequestMapping("/getByLocalbodytype/{f_localbodytype_id}")
 	@ResponseBody
-	public Object getLocalbodyByLocalbodytype(@PathVariable("f_localbodytype_id") int f_localbodytype_id)
+	public MasterResponse getLocalbodyByLocalbodytype(@PathVariable("f_localbodytype_id") int f_localbodytype_id)
 	{
 		
 		return localbodyservice.getLocalbodyByLocalbodytype(f_localbodytype_id);
@@ -72,18 +73,18 @@ public class LocalbodyController {
 	
 	@DeleteMapping("/delete/{localbody_id}")
 	@ResponseBody
-	public void deleteLocalbody(@PathVariable("localbody_id") int localbody_id)
+	public MasterResponse deleteLocalbody(@PathVariable("localbody_id") int localbody_id)
 	{
 		
-		localbodyservice.deleteLocalbody(localbody_id);
+		return localbodyservice.deleteLocalbody(localbody_id);
 		
 	}
 	
 	@PutMapping("/update/{localbody_id}")
 	@ResponseBody
-	public void updateLocalbody(@RequestBody Localbody localbody, @PathVariable("localbody_id") int localbody_id)
+	public MasterResponse updateLocalbody(@RequestBody Localbody localbody, @PathVariable("localbody_id") int localbody_id)
 	{
-		 localbodyservice.updateLocalbody(localbody,localbody_id);
+		 return localbodyservice.updateLocalbody(localbody,localbody_id);
 	}
 	
 }

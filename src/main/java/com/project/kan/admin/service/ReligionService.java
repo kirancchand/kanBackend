@@ -21,28 +21,42 @@ public class ReligionService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Religion saveReligion(@RequestBody Religion religion)
+	public MasterResponse saveReligion(@RequestBody Religion religion)
 	{
 //	    return religion;
 		Long a = mydao.queryForSave("master.religion.add",new Object[] {religion.getReligion()});
-		if(a!=0)
-			return religion;
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(religion);
+        return masterResponse;
+//		if(a!=0)
+//			return religion;
+//		else
+//			return null;
 		
 		
 	}
-	public List<Religion> getAllReligion()
+	public MasterResponse getAllReligion()
 	{
 		List<Religion> allReligion = mydao.findAll("master.religion.all",Religion.class);
-		return allReligion;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allReligion);
+        return masterResponse;
+
 		
 	}
 	
-	public Object getReligion(@PathVariable("religion_id") int religion_id)
+	public MasterResponse getReligion(@PathVariable("religion_id") int religion_id)
 	{
 		Object myObject = mydao.findById("master.religion.getById",new Object[]{religion_id},Religion.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -58,11 +72,15 @@ public class ReligionService {
 		
 	}
 	
-	public Long updateReligion(@RequestBody Religion religion, @PathVariable("religion_id") int religion_id)
+	public MasterResponse updateReligion(@RequestBody Religion religion, @PathVariable("religion_id") int religion_id)
 	{
 	
 		long myObject = mydao.queryForUpdate("master.religion.update", new Object[]{religion.getReligion(),religion_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(religion);
+        return masterResponse;
 //		return religion.getReligion();
 		
 	}

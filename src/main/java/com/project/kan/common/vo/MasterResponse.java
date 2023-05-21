@@ -1,13 +1,15 @@
 package com.project.kan.common.vo;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class MasterResponse {
+public class MasterResponse<T> {
 	
 
 	private String message;
 	private int status;
-	private Map<String,Object> data;
+
+	private T data;
 
 	public String getMessage() {
 		return message;
@@ -21,13 +23,12 @@ public class MasterResponse {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-    public Map<String, Object> getData() {
+    public T getData() {
         return data;
     }
-    public void setData(Map<String, Object> data) {
+
+    public void setData(T data) {
         this.data = data;
     }
 	
-	
-
 }

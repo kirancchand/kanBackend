@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.project.kan.admin.vo.Branch;
 import com.project.kan.admin.vo.Caste;
 import com.project.kan.common.dao.MyDao;
+import com.project.kan.common.vo.MasterResponse;
 
 @Service
 public class BranchService {
@@ -21,46 +22,72 @@ public class BranchService {
     @Autowired
     private MyDao mydao;
 
-    public Branch saveBranch(@RequestBody Branch branch)
+    public MasterResponse saveBranch(@RequestBody Branch branch)
     {
     	
         mydao.queryNameForUpdate("master.branch.add",new Object[] {branch.getBranch(),branch.getF_area_id()});
-        return branch;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(branch);
+        return masterResponse;
     }
 
-    public List<Branch> getAllBranch()
+    public MasterResponse getAllBranch()
 	{
 		List<Branch> allBranch=mydao.findAll("master.branch.all",Branch.class);
-		 return allBranch;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allBranch);
+		return masterResponse;
 		
 	}
 	
-	public Object getBranch(@PathVariable("branch_id") int branch_id)
+	public MasterResponse getBranch(@PathVariable("branch_id") int branch_id)
 	{
 		Object myObject=mydao.findById("master.branch.getById",new Object[]{branch_id},Branch.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
-	public List getBranchByArea(@PathVariable("area_id") int area_id)
+	public MasterResponse getBranchByArea(@PathVariable("area_id") int area_id)
 	{
 		List<Branch> byArea = mydao.findListById("master.branch.getByArea",new Object[]{area_id},Branch.class);
-        return byArea;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byArea);
+        return masterResponse;
 		
 	}
 	
-	public void deleteBranch(@PathVariable("branch_id") int branch_id)
+	public MasterResponse deleteBranch(@PathVariable("branch_id") int branch_id)
 	{
 		
 //		 branchrepo.deleteById(branch_id);
 		mydao.delete("master.branch.delete",new Object[]{branch_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Deleted Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData("");
+        return masterResponse;
 		
 	}
 	
-	public void updateBranch(@RequestBody Branch branch,@PathVariable("branch_id") int branch_id)
+	public MasterResponse updateBranch(@RequestBody Branch branch,@PathVariable("branch_id") int branch_id)
 	{
 	
 		mydao.queryNameForUpdate("master.branch.update",new Object[]{branch.getBranch(),branch.getF_area_id(),branch_id});
+    	MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(branch);
+        return masterResponse;
 //		return myObject;
 //		return branch.getBranch();
 		

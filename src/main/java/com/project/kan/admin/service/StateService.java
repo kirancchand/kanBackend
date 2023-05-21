@@ -22,28 +22,43 @@ public class StateService {
 	@Autowired
 	private MyDao mydao;
 	
-	public State saveState(@RequestBody State state)
+	public MasterResponse saveState(@RequestBody State state)
 	{
 		Long a=mydao.queryForSave("master.state.add",new Object[] {state.getState()});
-		logger.info("Saving..!"+a);
-		if(a!=0)
-			return state;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(state);
+        return masterResponse;
+//		logger.info("Saving..!"+a);
+//		if(a!=0)
+//			return state;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<State> getAllState()
+	public MasterResponse getAllState()
 	{
 		List<State> allState=mydao.findAll("master.state.all",State.class);
-		 return allState;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allState);
+        return masterResponse;
+
 		
 	}
 	
-	public Object getState(@PathVariable("state_id") int state_id)
+	public MasterResponse getState(@PathVariable("state_id") int state_id)
 	{
 		Object myObject=mydao.findById("master.state.getById",new Object[]{state_id},State.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+
 		
 	}
 	
@@ -59,11 +74,15 @@ public class StateService {
 		return masterResponse;
 		
 	}
-	public Long updateState(@RequestBody State state,@PathVariable("state_id") int state_id)
+	public MasterResponse updateState(@RequestBody State state,@PathVariable("state_id") int state_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.state.update",new Object[]{state.getState(),state_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(state);
+        return masterResponse;
 //		return state.getState();
 		
 	}

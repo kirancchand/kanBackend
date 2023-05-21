@@ -23,27 +23,40 @@ public class ProductService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Product saveProduct(@RequestBody Product product)
+	public MasterResponse saveProduct(@RequestBody Product product)
 	{
 		Long a=mydao.queryForSave("master.product.add",new Object[] {product.getProduct_name()});
-		if(a!=0)
-			return product;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(product);
+        return masterResponse;
+//		if(a!=0)
+//			return product;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Product> getAllProduct()
+	public MasterResponse getAllProduct()
 	{
 		List<Product> allProduct=mydao.findAll("master.product.all",Product.class);
-		 return allProduct;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allProduct);
+        return masterResponse;
 		
 	}
 	
-	public Object getProduct(@PathVariable("product_id") int product_id)
+	public MasterResponse getProduct(@PathVariable("product_id") int product_id)
 	{
 		Object myObject=mydao.findById("master.product.getById",new Object[]{product_id},Product.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -57,11 +70,15 @@ public class ProductService {
 		return masterResponse;
 		
 	}
-	public Long updateProduct(@RequestBody Product product,@PathVariable("product_id") int product_id)
+	public MasterResponse updateProduct(@RequestBody Product product,@PathVariable("product_id") int product_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.product.update",new Object[]{product.getProduct_name(),product_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(product);
+        return masterResponse;
 		
 	}
 

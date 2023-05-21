@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.RolemenuService;
 import com.project.kan.admin.vo.Rolemenu;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class RolemenuController {
     }
 
     @PostMapping("/add")
-    public Rolemenu addRolemenu(@RequestBody Rolemenu rolemenu)
+    public MasterResponse addRolemenu(@RequestBody Rolemenu rolemenu)
     {
         return rolemenuservice.saveRolemenu(rolemenu);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Rolemenu> getAllRolemenu()
+	public MasterResponse getAllRolemenu()
 	{
 
 		return rolemenuservice.getAllRolemenu();
@@ -45,7 +46,7 @@ public class RolemenuController {
 	}
 	@RequestMapping("/get/{role_menu_id}")
 	@ResponseBody
-	public Object getRolemenu(@PathVariable("role_menu_id") int role_menu_id)
+	public MasterResponse getRolemenu(@PathVariable("role_menu_id") int role_menu_id)
 	{
 
 		return rolemenuservice.getRolemenu(role_menu_id);
@@ -54,17 +55,17 @@ public class RolemenuController {
 
 	@DeleteMapping("/delete/{role_menu_id}")
 	@ResponseBody
-	public void deleteRolemenu(@PathVariable("role_menu_id") int role_menu_id)
+	public MasterResponse deleteRolemenu(@PathVariable("role_menu_id") int role_menu_id)
 	{
 
-		rolemenuservice.deleteRolemenu(role_menu_id);
+		return rolemenuservice.deleteRolemenu(role_menu_id);
 
 	}
 	@PutMapping("/update/{role_menu_id}")
 	@ResponseBody
-	public void updateRolemenu(@RequestBody Rolemenu rolemenu, @PathVariable("role_menu_id") int role_menu_id)
+	public MasterResponse updateRolemenu(@RequestBody Rolemenu rolemenu, @PathVariable("role_menu_id") int role_menu_id)
 	{
-		 rolemenuservice.updateRolemenu(rolemenu,role_menu_id);
+		 return rolemenuservice.updateRolemenu(rolemenu,role_menu_id);
 	}
 
 }

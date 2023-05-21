@@ -22,24 +22,36 @@ public class OrganisationmemberService {
     @Autowired
     private MyDao mydao;
 
-    public Organisationmember saveOrganisationmember(@RequestBody Organisationmember organisationmember)
+    public MasterResponse saveOrganisationmember(@RequestBody Organisationmember organisationmember)
     {
 
         mydao.queryNameForUpdate("master.organisationmember.add",new Object[] {organisationmember.getF_organisation_role_id(), organisationmember.getF_status_id(), organisationmember.getF_user_id(), organisationmember.getF_organisation_id()});
-        return organisationmember;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationmember);
+        return masterResponse;
     }
 
-    public List<Organisationmember> getAllOrganisationmember()
+    public MasterResponse getAllOrganisationmember()
 	{
 		List<Organisationmember> allOrganisationmember = mydao.findAll("master.organisationmember.all",Organisationmember.class);
-		 return allOrganisationmember;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allOrganisationmember);
+        return masterResponse;
 	}
 
 
-	public Object getOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
+	public MasterResponse getOrganisationmember(@PathVariable("organisation_member_id") int organisation_member_id)
 	{
 		Object myObject = mydao.findById("master.organisationmember.getById",new Object[]{organisation_member_id},Organisationmember.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 
 	}
 
@@ -56,10 +68,14 @@ public class OrganisationmemberService {
 
 	}
 
-	public void updateOrganisationmember(@RequestBody Organisationmember organisationmember,@PathVariable("organisation_member_id") int organisation_member_id)
+	public MasterResponse updateOrganisationmember(@RequestBody Organisationmember organisationmember,@PathVariable("organisation_member_id") int organisation_member_id)
 	{
 
 		mydao.queryNameForUpdate("master.organisationmember.update", new Object[]{organisationmember.getF_organisation_role_id(), organisationmember.getF_status_id(), organisationmember.getF_user_id(), organisationmember.getF_organisation_id(), organisation_member_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationmember);
+        return masterResponse;
 	}
 }

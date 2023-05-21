@@ -21,24 +21,36 @@ public class UserroleService {
     @Autowired
     private MyDao mydao;
     
-    public Userrole saveUserrole(@RequestBody Userrole userrole)
+    public MasterResponse saveUserrole(@RequestBody Userrole userrole)
     {
     	
         mydao.queryNameForUpdate("master.user_role.add",new Object[] {userrole.getF_role_id(), userrole.getF_user_id()});
-        return userrole;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(userrole);
+        return masterResponse;
     }
 
-    public List<Userrole> getAllUserrole()
+    public MasterResponse getAllUserrole()
 	{
 		List<Userrole> allUserrole = mydao.findAll("master.user_role.all",Userrole.class);
-		 return allUserrole;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allUserrole);
+        return masterResponse;		
 	}
 	
   //Get User_role by id..................//
-	public Object getUserrole(@PathVariable("user_role_id") int user_role_id)
+	public MasterResponse getUserrole(@PathVariable("user_role_id") int user_role_id)
 	{
 		Object myObject = mydao.findById("master.user_role.getById",new Object[]{user_role_id},Userrole.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -54,10 +66,15 @@ public class UserroleService {
 		
 	}
 	
-	public void updateUserrole(@RequestBody Userrole userrole,@PathVariable("user_role_id") int user_role_id)
+	public MasterResponse updateUserrole(@RequestBody Userrole userrole,@PathVariable("user_role_id") int user_role_id)
 	{
 	
 		mydao.queryNameForUpdate("master.user_role.update", new Object[]{userrole.getF_role_id(), userrole.getF_user_id(), user_role_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(userrole);
+        return masterResponse;
 
 	}
 	

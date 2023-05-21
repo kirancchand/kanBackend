@@ -31,14 +31,14 @@ public class OrganisationtypeController {
 	}
 
 	@PostMapping("/add")
-	public Organisationtype addOrganisationtype(@RequestBody Organisationtype organisationtype)
+	public MasterResponse addOrganisationtype(@RequestBody Organisationtype organisationtype)
 	{
 		return organisationtypeservice.saveOrganisationtype(organisationtype);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Organisationtype> getAllOrganisationtype()
+	public MasterResponse getAllOrganisationtype()
 	{
 		
 		return organisationtypeservice.getAllOrganisationtype();
@@ -46,7 +46,7 @@ public class OrganisationtypeController {
 	}
 	@RequestMapping("/get/{organisation_type_id}")
 	@ResponseBody
-	public Object getOrganisationtype(@PathVariable("organisation_type_id") int organisation_type_id)
+	public MasterResponse getOrganisationtype(@PathVariable("organisation_type_id") int organisation_type_id)
 	{
 		
 		return organisationtypeservice.getOrganisationtype(organisation_type_id);
@@ -62,7 +62,7 @@ public class OrganisationtypeController {
 	}
 	@PutMapping("/update/{organisation_type_id}")
 	@ResponseBody
-	public Long updateOrganisationtype(@RequestBody Organisationtype organisationtype,@PathVariable("organisation_type_id") int organisation_type_id)
+	public MasterResponse updateOrganisationtype(@RequestBody Organisationtype organisationtype,@PathVariable("organisation_type_id") int organisation_type_id)
 	{
 		return organisationtypeservice.updateOrganisationtype(organisationtype,organisation_type_id);
 	}

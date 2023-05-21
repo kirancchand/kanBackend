@@ -22,7 +22,7 @@ public class OrganisationproductService {
     @Autowired
     private MyDao mydao;
 
-    public Organisationproduct saveOrganisationproduct(@RequestBody Organisationproduct organisationproduct)
+    public MasterResponse saveOrganisationproduct(@RequestBody Organisationproduct organisationproduct)
     {
 
         mydao.queryNameForUpdate("master.organisationproduct.add",new Object[]{
@@ -32,21 +32,34 @@ public class OrganisationproductService {
           organisationproduct.getProduct_qty(),
           organisationproduct.getProduct_desc()
         });
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationproduct);
+        return masterResponse;
 
-        return organisationproduct;
     }
 
-    public List<Organisationproduct> getAllOrganisationproduct()
+    public MasterResponse getAllOrganisationproduct()
 	{
 		List<Organisationproduct> allOrganisationproduct = mydao.findAll("master.organisationproduct.all",Organisationproduct.class);
-		 return allOrganisationproduct;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allOrganisationproduct);
+        return masterResponse;
+
 	}
 
 
-	public Object getOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
+	public MasterResponse getOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
 	{
 		Object myObject = mydao.findById("master.organisationproduct.getById",new Object[]{organisation_product_id},Organisationproduct.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 
 	}
 
@@ -63,7 +76,7 @@ public class OrganisationproductService {
 
 	}
 
-	public void updateOrganisationproduct(@RequestBody Organisationproduct organisationproduct,@PathVariable("organisation_product_id") int organisation_product_id)
+	public MasterResponse updateOrganisationproduct(@RequestBody Organisationproduct organisationproduct,@PathVariable("organisation_product_id") int organisation_product_id)
 	{
 
 		mydao.queryNameForUpdate("master.organisationproduct.update", new Object[]{
@@ -74,6 +87,11 @@ public class OrganisationproductService {
         organisationproduct.getProduct_desc(),
         organisation_product_id
       });
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationproduct);
+        return masterResponse;
 
 	}
 }

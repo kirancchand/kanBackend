@@ -3,7 +3,7 @@ package com.project.kan.admin.vo;
 public class Area {
 	private int area_id;
 	private String area;
-	private int f_district_id;
+	private int f_region_id;
 	private int f_localbodytype_id;
 	
 	public int getArea_id() {
@@ -18,11 +18,11 @@ public class Area {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public int getF_district_id() {
-		return f_district_id;
+	public int getF_region_id() {
+		return f_region_id;
 	}
-	public void setF_district_id(int f_district_id) {
-		this.f_district_id = f_district_id;
+	public void setF_region_id(int f_region_id) {
+		this.f_region_id = f_region_id;
 	}
 	public int getF_localbodytype_id() {
 		return f_localbodytype_id;

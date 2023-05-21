@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.MigrationsService;
 import com.project.kan.admin.vo.Migrations;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/migrations")
@@ -29,14 +30,14 @@ public class MigrationsController {
     }
 
     @PostMapping("/add")
-    public Migrations addMigrations(@RequestBody Migrations migrations)
+    public MasterResponse addMigrations(@RequestBody Migrations migrations)
     {
         return migrationsservice.saveMigrations(migrations);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Migrations> getAllMigrations()
+	public MasterResponse getAllMigrations()
 	{
 		
 		return migrationsservice.getAllMigrations();
@@ -45,7 +46,7 @@ public class MigrationsController {
     
 	@RequestMapping("/get/{id}")
 	@ResponseBody
-	public Object getMigrations(@PathVariable("id") int id)
+	public MasterResponse getMigrations(@PathVariable("id") int id)
 	{
 		
 		return migrationsservice.getMigrations(id);
@@ -54,18 +55,18 @@ public class MigrationsController {
 	
 	@DeleteMapping("/delete/{id}")
 	@ResponseBody
-	public void deleteMigrations(@PathVariable("id") int id)
+	public MasterResponse deleteMigrations(@PathVariable("id") int id)
 	{
 		
-		migrationsservice.deleteMigrations(id);
+		return migrationsservice.deleteMigrations(id);
 		
 	}
 	
 	@PutMapping("/update/{id}")
 	@ResponseBody
-	public void updateMigrations(@RequestBody Migrations migrations, @PathVariable("id") int id)
+	public MasterResponse updateMigrations(@RequestBody Migrations migrations, @PathVariable("id") int id)
 	{
-		 migrationsservice.updateMigrations(migrations,id);
+		 return migrationsservice.updateMigrations(migrations,id);
 	}
 	
 }

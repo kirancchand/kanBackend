@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.OrganisationService;
 import com.project.kan.admin.vo.Organisation;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class OrganisationController {
     }
 
     @PostMapping("/add")
-    public Organisation addOrganisation(@RequestBody Organisation organisation)
+    public MasterResponse addOrganisation(@RequestBody Organisation organisation)
     {
         return organisationservice.saveOrganisation(organisation);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Organisation> getAllOrganisation()
+	public MasterResponse getAllOrganisation()
 	{
 
 		return organisationservice.getAllOrganisation();
@@ -45,7 +46,7 @@ public class OrganisationController {
 	}
 	@RequestMapping("/get/{organisation_id}")
 	@ResponseBody
-	public Object getOrganisation(@PathVariable("organisation_id") int organisation_id)
+	public MasterResponse getOrganisation(@PathVariable("organisation_id") int organisation_id)
 	{
 
 		return organisationservice.getOrganisation(organisation_id);
@@ -54,7 +55,7 @@ public class OrganisationController {
 
 	@RequestMapping("/getByOrganisationtype/{f_organisation_type_id}")
 	@ResponseBody
-	public Object getOrganisationByOrganisationtype(@PathVariable("f_organisation_type_id") int f_organisation_type_id)
+	public MasterResponse getOrganisationByOrganisationtype(@PathVariable("f_organisation_type_id") int f_organisation_type_id)
 	{
 
 		return organisationservice.getOrganisationByOrganisationtype(f_organisation_type_id);
@@ -63,17 +64,17 @@ public class OrganisationController {
 
 	@DeleteMapping("/delete/{organisation_id}")
 	@ResponseBody
-	public void deleteOrganisation(@PathVariable("organisation_id") int organisation_id)
+	public MasterResponse deleteOrganisation(@PathVariable("organisation_id") int organisation_id)
 	{
 
-		organisationservice.deleteOrganisation(organisation_id);
+		return organisationservice.deleteOrganisation(organisation_id);
 
 	}
 	@PutMapping("/update/{organisation_id}")
 	@ResponseBody
-	public void updateOrganisation(@RequestBody Organisation organisation, @PathVariable("organisation_id") int organisation_id)
+	public MasterResponse updateOrganisation(@RequestBody Organisation organisation, @PathVariable("organisation_id") int organisation_id)
 	{
-		 organisationservice.updateOrganisation(organisation,organisation_id);
+		 return organisationservice.updateOrganisation(organisation,organisation_id);
 	}
 
 }

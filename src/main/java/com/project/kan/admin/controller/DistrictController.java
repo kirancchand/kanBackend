@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.DistrictService;
 import com.project.kan.admin.vo.District;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/district")
@@ -29,14 +30,14 @@ public class DistrictController {
     }
 
     @PostMapping("/add")
-    public District addDistrict(@RequestBody District district)
+    public MasterResponse addDistrict(@RequestBody District district)
     {
         return districtservice.saveDistrict(district);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<District> getAllDistrict()
+	public MasterResponse getAllDistrict()
 	{
 		
 		return districtservice.getAllDistrict();
@@ -44,7 +45,7 @@ public class DistrictController {
 	}
 	@RequestMapping("/get/{district_id}")
 	@ResponseBody
-	public Object getDistrict(@PathVariable("district_id") int district_id)
+	public MasterResponse getDistrict(@PathVariable("district_id") int district_id)
 	{
 		
 		return districtservice.getDistrict(district_id);
@@ -54,7 +55,7 @@ public class DistrictController {
 	
 	@RequestMapping("/getByState/{state_id}")
 	@ResponseBody
-	public List getDistrictByState(@PathVariable("state_id") int state_id)
+	public MasterResponse getDistrictByState(@PathVariable("state_id") int state_id)
 	{
 
 		return districtservice.getDistrictByState(state_id);
@@ -63,17 +64,17 @@ public class DistrictController {
 	
 	@DeleteMapping("/delete/{district_id}")
 	@ResponseBody
-	public void deleteDistrict(@PathVariable("district_id") int district_id)
+	public MasterResponse deleteDistrict(@PathVariable("district_id") int district_id)
 	{
 		
-		districtservice.deleteDistrict(district_id);
+		return districtservice.deleteDistrict(district_id);
 		
 	}
 	@PutMapping("/update/{district_id}")
 	@ResponseBody
-	public void updateDistrict(@RequestBody District district,@PathVariable("district_id") int district_id)
+	public MasterResponse updateDistrict(@RequestBody District district,@PathVariable("district_id") int district_id)
 	{
-		 districtservice.updateDistrict(district,district_id);
+		 return districtservice.updateDistrict(district,district_id);
 	}
 
 }

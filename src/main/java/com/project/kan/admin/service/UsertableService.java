@@ -22,24 +22,38 @@ public class UsertableService {
     @Autowired
     private MyDao mydao;
     
-    public Usertable saveUser(@RequestBody Usertable usertable)
+    public MasterResponse saveUser(@RequestBody Usertable usertable)
     {
     	
         mydao.queryNameForUpdate("master.usertable.add",new Object[] {usertable.getEmail_id(),usertable.getF_ward_id(),usertable.getFullname(),usertable.getMob_no(),usertable.getPassword(),usertable.getStatus(),usertable.getUser_id()});
-        return usertable;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(usertable);
+        return masterResponse;
+
     }
 
-    public List<Usertable> getAllUser()
+    public MasterResponse getAllUser()
 	{
 		List<Usertable> allUser = mydao.findAll("master.usertable.all",Usertable.class);
-		 return allUser;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allUser);
+        return masterResponse;		
 	}
 	
   //Get user by id..................//
-	public Object getUser(@PathVariable("id") int id)
+	public MasterResponse getUser(@PathVariable("id") int id)
 	{
 		Object myObject = mydao.findById("master.usertable.getById",new Object[]{id},Usertable.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+
 		
 	}
 	
@@ -54,11 +68,15 @@ public class UsertableService {
 		
 	}
 	
-	public void updateUser(@RequestBody Usertable usertable,@PathVariable("id") int id)
+	public MasterResponse updateUser(@RequestBody Usertable usertable,@PathVariable("id") int id)
 	{
 	
 		mydao.queryNameForUpdate("master.usertable.update", new Object[]{usertable.getEmail_id(), usertable.getF_ward_id(), usertable.getFullname(), usertable.getMob_no(), usertable.getPassword(), usertable.getStatus(), usertable.getUser_id(), id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(usertable);
+        return masterResponse;
 	}
 	
 }

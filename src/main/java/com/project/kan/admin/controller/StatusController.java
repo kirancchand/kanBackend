@@ -30,14 +30,14 @@ public class StatusController {
 	}
 
 	@PostMapping("/add")
-	public Status addStatus(@RequestBody Status status)
+	public MasterResponse addStatus(@RequestBody Status status)
 	{
 		return statusservice.saveStatus(status);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Status> getAllStatus()
+	public MasterResponse getAllStatus()
 	{
 		
 		return statusservice.getAllStatus();
@@ -45,7 +45,7 @@ public class StatusController {
 	}
 	@RequestMapping("/get/{status_id}")
 	@ResponseBody
-	public Object getStatus(@PathVariable("status_id") int status_id)
+	public MasterResponse getStatus(@PathVariable("status_id") int status_id)
 	{
 		
 		return statusservice.getStatus(status_id);
@@ -61,7 +61,7 @@ public class StatusController {
 	}
 	@PutMapping("/update/{status_id}")
 	@ResponseBody
-	public Long updateStatus(@RequestBody Status status,@PathVariable("status_id") int status_id)
+	public MasterResponse updateStatus(@RequestBody Status status,@PathVariable("status_id") int status_id)
 	{
 		return statusservice.updateStatus(status,status_id);
 	}

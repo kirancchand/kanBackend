@@ -22,24 +22,36 @@ public class RolemenuService {
     @Autowired
     private MyDao mydao;
 
-    public Rolemenu saveRolemenu(@RequestBody Rolemenu rolemenu)
+    public MasterResponse saveRolemenu(@RequestBody Rolemenu rolemenu)
     {
 
         mydao.queryNameForUpdate("master.rolemenu.add",new Object[] {rolemenu.getF_menu_id(), rolemenu.getF_role_id()});
-        return rolemenu;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(rolemenu);
+        return masterResponse;
     }
 
-    public List<Rolemenu> getAllRolemenu()
+    public MasterResponse getAllRolemenu()
 	{
 		List<Rolemenu> allRolemenu = mydao.findAll("master.rolemenu.all",Rolemenu.class);
-		 return allRolemenu;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allRolemenu);
+        return masterResponse;
 	}
 
 
-	public Object getRolemenu(@PathVariable("role_menu_id") int role_menu_id)
+	public MasterResponse getRolemenu(@PathVariable("role_menu_id") int role_menu_id)
 	{
 		Object myObject = mydao.findById("master.rolemenu.getById",new Object[]{role_menu_id},Rolemenu.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 
 	}
 
@@ -54,10 +66,15 @@ public class RolemenuService {
 
 	}
 
-	public void updateRolemenu(@RequestBody Rolemenu rolemenu,@PathVariable("role_menu_id") int role_menu_id)
+	public MasterResponse updateRolemenu(@RequestBody Rolemenu rolemenu,@PathVariable("role_menu_id") int role_menu_id)
 	{
 
 		mydao.queryNameForUpdate("master.rolemenu.update", new Object[]{rolemenu.getF_menu_id(), rolemenu.getF_role_id(), role_menu_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(rolemenu);
+        return masterResponse;
 
 	}
   

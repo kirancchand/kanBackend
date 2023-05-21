@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.PrivilegeService;
 import com.project.kan.admin.vo.Privilege;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class PrivilegeController {
     }
 
     @PostMapping("/add")
-    public Privilege addPrivilege(@RequestBody Privilege privilege)
+    public MasterResponse addPrivilege(@RequestBody Privilege privilege)
     {
         return privilegeservice.savePrivilege(privilege);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Privilege> getAllPrivilege()
+	public MasterResponse getAllPrivilege()
 	{
 
 		return privilegeservice.getAllPrivilege();
@@ -45,7 +46,7 @@ public class PrivilegeController {
 	}
 	@RequestMapping("/get/{privilege_id}")
 	@ResponseBody
-	public Object getPrivilege(@PathVariable("privilege_id") int privilege_id)
+	public MasterResponse getPrivilege(@PathVariable("privilege_id") int privilege_id)
 	{
 
 		return privilegeservice.getPrivilege(privilege_id);
@@ -54,17 +55,17 @@ public class PrivilegeController {
 
 	@DeleteMapping("/delete/{privilege_id}")
 	@ResponseBody
-	public void deletePrivilege(@PathVariable("privilege_id") int privilege_id)
+	public MasterResponse deletePrivilege(@PathVariable("privilege_id") int privilege_id)
 	{
 
-		privilegeservice.deletePrivilege(privilege_id);
+		return privilegeservice.deletePrivilege(privilege_id);
 
 	}
 	@PutMapping("/update/{privilege_id}")
 	@ResponseBody
-	public void updatePrivilege(@RequestBody Privilege privilege, @PathVariable("privilege_id") int privilege_id)
+	public MasterResponse updatePrivilege(@RequestBody Privilege privilege, @PathVariable("privilege_id") int privilege_id)
 	{
-		 privilegeservice.updatePrivilege(privilege,privilege_id);
+		 return privilegeservice.updatePrivilege(privilege,privilege_id);
 	}
 
 }

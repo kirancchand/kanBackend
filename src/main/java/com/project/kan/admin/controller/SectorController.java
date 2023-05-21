@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.SectorService;
 import com.project.kan.admin.vo.Sector;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class SectorController {
     }
 
     @PostMapping("/add")
-    public Sector addSector(@RequestBody Sector sector)
+    public MasterResponse addSector(@RequestBody Sector sector)
     {
         return sectorservice.saveSector(sector);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Sector> getAllSector()
+	public MasterResponse getAllSector()
 	{
 
 		return sectorservice.getAllSector();
@@ -45,7 +46,7 @@ public class SectorController {
 	}
 	@RequestMapping("/get/{sector_id}")
 	@ResponseBody
-	public Object getSector(@PathVariable("sector_id") int sector_id)
+	public MasterResponse getSector(@PathVariable("sector_id") int sector_id)
 	{
 
 		return sectorservice.getSector(sector_id);
@@ -54,17 +55,17 @@ public class SectorController {
 
 	@DeleteMapping("/delete/{sector_id}")
 	@ResponseBody
-	public void deleteSector(@PathVariable("sector_id") int sector_id)
+	public MasterResponse deleteSector(@PathVariable("sector_id") int sector_id)
 	{
 
-		sectorservice.deleteSector(sector_id);
+		return sectorservice.deleteSector(sector_id);
 
 	}
 	@PutMapping("/update/{sector_id}")
 	@ResponseBody
-	public void updateSector(@RequestBody Sector sector, @PathVariable("sector_id") int sector_id)
+	public MasterResponse updateSector(@RequestBody Sector sector, @PathVariable("sector_id") int sector_id)
 	{
-		 sectorservice.updateSector(sector,sector_id);
+		 return sectorservice.updateSector(sector,sector_id);
 	}
 
 }

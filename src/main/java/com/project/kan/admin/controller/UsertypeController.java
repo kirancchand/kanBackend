@@ -31,14 +31,14 @@ public class UsertypeController {
 	}
 
 	@PostMapping("/add")
-	public Usertype addUsertype(@RequestBody Usertype usertype)
+	public MasterResponse addUsertype(@RequestBody Usertype usertype)
 	{
 		return usertypeservice.saveUsertype(usertype);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Usertype> getAllUsertype()
+	public MasterResponse getAllUsertype()
 	{
 		
 		return usertypeservice.getAllUsertype();
@@ -46,7 +46,7 @@ public class UsertypeController {
 	}
 	@RequestMapping("/get/{usertype_id}")
 	@ResponseBody
-	public Object getUsertype(@PathVariable("usertype_id") int usertype_id)
+	public MasterResponse getUsertype(@PathVariable("usertype_id") int usertype_id)
 	{
 		
 		return usertypeservice.getUsertype(usertype_id);
@@ -62,7 +62,7 @@ public class UsertypeController {
 	}
 	@PutMapping("/update/{usertype_id}")
 	@ResponseBody
-	public Long updateUsertype(@RequestBody Usertype usertype,@PathVariable("usertype_id") int usertype_id)
+	public MasterResponse updateUsertype(@RequestBody Usertype usertype,@PathVariable("usertype_id") int usertype_id)
 	{
 		return usertypeservice.updateUsertype(usertype,usertype_id);
 	}

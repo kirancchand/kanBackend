@@ -21,27 +21,42 @@ public class OrganisationtypeService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Organisationtype saveOrganisationtype(@RequestBody Organisationtype organisationtype)
+	public MasterResponse saveOrganisationtype(@RequestBody Organisationtype organisationtype)
 	{
 		Long a = mydao.queryForSave("master.organisationtype.add",new Object[] {organisationtype.getOrganisation_type()});
-		if(a!=0)
-			return organisationtype;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationtype);
+        return masterResponse;
+//		if(a!=0)
+//			return organisationtype;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Organisationtype> getAllOrganisationtype()
+	public MasterResponse getAllOrganisationtype()
 	{
 		List<Organisationtype> allOrganisationtype = mydao.findAll("master.organisationtype.all", Organisationtype.class);
-		 return allOrganisationtype;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allOrganisationtype);
+        return masterResponse;
+
 		
 	}
 	
-	public Object getOrganisationtype(@PathVariable("organisation_type_id") int organisation_type_id)
+	public MasterResponse getOrganisationtype(@PathVariable("organisation_type_id") int organisation_type_id)
 	{
 		Object myObject = mydao.findById("master.organisationtype.getById",new Object[]{organisation_type_id},Organisationtype.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+
 		
 	}
 	
@@ -55,11 +70,15 @@ public class OrganisationtypeService {
 		return masterResponse;
 		
 	}
-	public Long updateOrganisationtype(@RequestBody Organisationtype organisationtype,@PathVariable("organisation_type_id") int organisation_type_id)
+	public MasterResponse updateOrganisationtype(@RequestBody Organisationtype organisationtype,@PathVariable("organisation_type_id") int organisation_type_id)
 	{
 	
 		long myObject = mydao.queryForUpdate("master.organisationtype.update",new Object[]{organisationtype.getOrganisation_type(),organisation_type_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(organisationtype);
+        return masterResponse;
 		
 	}
 	

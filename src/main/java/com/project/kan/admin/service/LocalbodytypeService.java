@@ -21,28 +21,41 @@ public class LocalbodytypeService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Localbodytype saveLocalbodytype(@RequestBody Localbodytype localbodytype)
+	public MasterResponse saveLocalbodytype(@RequestBody Localbodytype localbodytype)
 	{
 		Long a=mydao.queryForSave("master.localbodytype.add",new Object[] {localbodytype.getLocalbodytype_name()});
-		if(a!=0)
-			return localbodytype;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(localbodytype);
+        return masterResponse;
+//		if(a!=0)
+//			return localbodytype;
+//			
+//		else
+//			return null;
 		
 		
 	}
-	public List<Localbodytype> getAllLocalbodytype()
+	public MasterResponse getAllLocalbodytype()
 	{
 		List<Localbodytype> allLocalbodytype = mydao.findAll("master.localbodytype.all",Localbodytype.class);
-		 return allLocalbodytype;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allLocalbodytype);
+        return masterResponse;
 		
 	}
 	
-	public Object getLocalbodytype(@PathVariable("localbodytype_id") int localbodytype_id)
+	public MasterResponse getLocalbodytype(@PathVariable("localbodytype_id") int localbodytype_id)
 	{
 		Object myObject = mydao.findById("master.localbodytype.getById",new Object[]{localbodytype_id},Localbodytype.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -56,11 +69,15 @@ public class LocalbodytypeService {
 		return masterResponse;
 		
 	}
-	public Long updateLocalbodytype(@RequestBody Localbodytype localbodytype,@PathVariable("localbodytype_id") int localbodytype_id)
+	public MasterResponse updateLocalbodytype(@RequestBody Localbodytype localbodytype,@PathVariable("localbodytype_id") int localbodytype_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.localbodytype.update",new Object[]{localbodytype.getLocalbodytype_name(),localbodytype_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(localbodytype);
+        return masterResponse;
 		
 	}
 }

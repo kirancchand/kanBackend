@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.RolemenuprivilegeService;
 import com.project.kan.admin.vo.Rolemenuprivilege;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class RolemenuprivilegeController {
     }
 
     @PostMapping("/add")
-    public Rolemenuprivilege addRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege)
+    public MasterResponse addRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege)
     {
         return rolemenuprivilegeservice.saveRolemenuprivilege(rolemenuprivilege);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Rolemenuprivilege> getAllRolemenuprivilege()
+	public MasterResponse getAllRolemenuprivilege()
 	{
 		
 		return rolemenuprivilegeservice.getAllRolemenuprivilege();
@@ -45,7 +46,7 @@ public class RolemenuprivilegeController {
 	}
 	@RequestMapping("/get/{role_menu_privilege_id}")
 	@ResponseBody
-	public Object getRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
+	public MasterResponse getRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
 	{
 		
 		return rolemenuprivilegeservice.getRolemenuprivilege(role_menu_privilege_id);
@@ -54,18 +55,18 @@ public class RolemenuprivilegeController {
 	
 	@DeleteMapping("/delete/{role_menu_privilege_id}")
 	@ResponseBody
-	public void deleteRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
+	public MasterResponse deleteRolemenuprivilege(@PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
 	{
 		
-		rolemenuprivilegeservice.deleteRolemenuprivilege(role_menu_privilege_id);
+		return rolemenuprivilegeservice.deleteRolemenuprivilege(role_menu_privilege_id);
 		
 	}
 	
 	@PutMapping("/update/{role_menu_privilege_id}")
 	@ResponseBody
-	public void updateRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege, @PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
+	public MasterResponse updateRolemenuprivilege(@RequestBody Rolemenuprivilege rolemenuprivilege, @PathVariable("role_menu_privilege_id") int role_menu_privilege_id)
 	{
-		 rolemenuprivilegeservice.updateRolemenuprivilege(rolemenuprivilege,role_menu_privilege_id);
+		 return rolemenuprivilegeservice.updateRolemenuprivilege(rolemenuprivilege,role_menu_privilege_id);
 	}
 
 }

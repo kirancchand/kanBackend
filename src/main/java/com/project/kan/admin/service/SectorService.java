@@ -21,24 +21,39 @@ public class SectorService {
     @Autowired
     private MyDao mydao;
 
-    public Sector saveSector(@RequestBody Sector sector)
+    public MasterResponse saveSector(@RequestBody Sector sector)
     {
 
         mydao.queryNameForUpdate("master.sector.add",new Object[] {sector.getSector(), sector.getF_branch_id()});
-        return sector;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(sector);
+        return masterResponse;
+
     }
 
-    public List<Sector> getAllSector()
+    public MasterResponse getAllSector()
 	{
 		List<Sector> allSector = mydao.findAll("master.sector.all",Sector.class);
-		 return allSector;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allSector);
+        return masterResponse;
+
 	}
 
 
-	public Object getSector(@PathVariable("sector_id") int sector_id)
+	public MasterResponse getSector(@PathVariable("sector_id") int sector_id)
 	{
 		Object myObject = mydao.findById("master.sector.getById",new Object[]{sector_id},Sector.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
+
 
 	}
 
@@ -54,11 +69,15 @@ public class SectorService {
 
 	}
 
-	public void updateSector(@RequestBody Sector sector,@PathVariable("sector_id") int sector_id)
+	public MasterResponse updateSector(@RequestBody Sector sector,@PathVariable("sector_id") int sector_id)
 	{
 
 		mydao.queryNameForUpdate("master.sector.update", new Object[]{sector.getSector(), sector.getF_branch_id(), sector_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(sector);
+        return masterResponse;
 	}
 	
 }

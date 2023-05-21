@@ -32,14 +32,14 @@ public class ProductController {
 	}
 
 	@PostMapping("/add")
-	public Product addProduct(@RequestBody Product product)
+	public MasterResponse addProduct(@RequestBody Product product)
 	{
 		return productservice.saveProduct(product);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Product> getAllProduct()
+	public MasterResponse getAllProduct()
 	{
 		
 		return productservice.getAllProduct();
@@ -47,7 +47,7 @@ public class ProductController {
 	}
 	@RequestMapping("/get/{product_id}")
 	@ResponseBody
-	public Object getProduct(@PathVariable("product_id") int product_id)
+	public MasterResponse getProduct(@PathVariable("product_id") int product_id)
 	{
 		
 		return productservice.getProduct(product_id);
@@ -63,7 +63,7 @@ public class ProductController {
 	}
 	@PutMapping("/update/{product_id}")
 	@ResponseBody
-	public Long updateProduct(@RequestBody Product product,@PathVariable("product_id") int product_id)
+	public MasterResponse updateProduct(@RequestBody Product product,@PathVariable("product_id") int product_id)
 	{
 		return productservice.updateProduct(product,product_id);
 	}

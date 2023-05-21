@@ -20,31 +20,47 @@ public class DistrictService {
     @Autowired
     private MyDao mydao;
 
-    public District saveDistrict(@RequestBody District district)
+    public MasterResponse saveDistrict(@RequestBody District district)
     {
     	
         mydao.queryNameForUpdate("master.district.add",new Object[] {district.getDistrict(),district.getF_state_id()});
-        return district;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(district);
+        return masterResponse;
     }
 
-    public List<District> getAllDistrict()
+    public MasterResponse getAllDistrict()
 	{
 		List<District> allDistrict=mydao.findAll("master.district.all",District.class);
-		 return allDistrict;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allDistrict);
+        return masterResponse;
 		
 	}
 	
-	public Object getDistrict(@PathVariable("district_id") int district_id)
+	public MasterResponse getDistrict(@PathVariable("district_id") int district_id)
 	{
 		Object myObject=mydao.findById("master.district.getById",new Object[]{district_id},District.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
-	public List<District> getDistrictByState(@PathVariable("state_id") int state_id)
+	public MasterResponse getDistrictByState(@PathVariable("state_id") int state_id)
 	{
 	    List<District> byState=mydao.findListById("master.district.getByState",new Object[]{state_id},District.class);
-		return byState;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byState);
+        return masterResponse;
 		
 	}
 	
@@ -60,10 +76,15 @@ public class DistrictService {
 		
 	}
 	
-	public void updateDistrict(@RequestBody District district,@PathVariable("district_id") int district_id)
+	public MasterResponse updateDistrict(@RequestBody District district,@PathVariable("district_id") int district_id)
 	{
 	
 		mydao.queryNameForUpdate("master.district.update",new Object[]{district.getDistrict(),district.getF_state_id(),district_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(district);
+        return masterResponse;
 //		return myObject;
 //		return district.getDistrict();
 		

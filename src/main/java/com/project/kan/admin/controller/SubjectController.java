@@ -32,14 +32,14 @@ public class SubjectController {
 	}
 
 	@PostMapping("/add")
-	public Subject addSubject(@RequestBody Subject subject)
+	public MasterResponse addSubject(@RequestBody Subject subject)
 	{
 		return subjectservice.saveSubject(subject);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Subject> getAllSubject()
+	public MasterResponse getAllSubject()
 	{
 		
 		return subjectservice.getAllSubject();
@@ -47,7 +47,7 @@ public class SubjectController {
 	}
 	@RequestMapping("/get/{subject_id}")
 	@ResponseBody
-	public Object getSubject(@PathVariable("subject_id") int subject_id)
+	public MasterResponse getSubject(@PathVariable("subject_id") int subject_id)
 	{
 		
 		return subjectservice.getSubject(subject_id);
@@ -63,7 +63,7 @@ public class SubjectController {
 	}
 	@PutMapping("/update/{subject_id}")
 	@ResponseBody
-	public Long updateSubject(@RequestBody Subject subject,@PathVariable("subject_id") int subject_id)
+	public MasterResponse updateSubject(@RequestBody Subject subject,@PathVariable("subject_id") int subject_id)
 	{
 		return subjectservice.updateSubject(subject,subject_id);
 	}

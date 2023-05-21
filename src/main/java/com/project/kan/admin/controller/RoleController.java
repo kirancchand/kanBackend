@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.RoleService;
 import com.project.kan.admin.vo.Role;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class RoleController {
     }
 
     @PostMapping("/add")
-    public Role addRole(@RequestBody Role role)
+    public MasterResponse addRole(@RequestBody Role role)
     {
         return roleservice.saveRole(role);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Role> getAllRole()
+	public MasterResponse getAllRole()
 	{
 
 		return roleservice.getAllRole();
@@ -45,7 +46,7 @@ public class RoleController {
 	}
 	@RequestMapping("/get/{role_id}")
 	@ResponseBody
-	public Object getRole(@PathVariable("role_id") int role_id)
+	public MasterResponse getRole(@PathVariable("role_id") int role_id)
 	{
 
 		return roleservice.getRole(role_id);
@@ -54,17 +55,17 @@ public class RoleController {
 
 	@DeleteMapping("/delete/{role_id}")
 	@ResponseBody
-	public void deleteRole(@PathVariable("role_id") int role_id)
+	public MasterResponse deleteRole(@PathVariable("role_id") int role_id)
 	{
 
-		roleservice.deleteRole(role_id);
+		return roleservice.deleteRole(role_id);
 
 	}
 	@PutMapping("/update/{role_id}")
 	@ResponseBody
-	public void updateRole(@RequestBody Role role, @PathVariable("role_id") int role_id)
+	public MasterResponse updateRole(@RequestBody Role role, @PathVariable("role_id") int role_id)
 	{
-		 roleservice.updateRole(role,role_id);
+		 return roleservice.updateRole(role,role_id);
 	}
 
 }

@@ -31,14 +31,14 @@ public class LocalbodytypeController {
 	}
 
 	@PostMapping("/add")
-	public Localbodytype addLocalbodytype(@RequestBody Localbodytype localbodytype)
+	public MasterResponse addLocalbodytype(@RequestBody Localbodytype localbodytype)
 	{
 		return localbodytypeservice.saveLocalbodytype(localbodytype);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Localbodytype> getAllLocalbodytype()
+	public MasterResponse getAllLocalbodytype()
 	{
 		
 		return localbodytypeservice.getAllLocalbodytype();
@@ -46,7 +46,7 @@ public class LocalbodytypeController {
 	}
 	@RequestMapping("/get/{localbodytype_id}")
 	@ResponseBody
-	public Object getLocalbodytype(@PathVariable("localbodytype_id") int localbodytype_id)
+	public MasterResponse getLocalbodytype(@PathVariable("localbodytype_id") int localbodytype_id)
 	{
 		
 		return localbodytypeservice.getLocalbodytype(localbodytype_id);
@@ -62,7 +62,7 @@ public class LocalbodytypeController {
 	}
 	@PutMapping("/update/{localbodytype_id}")
 	@ResponseBody
-	public Long updateLocalbodytype(@RequestBody Localbodytype localbodytype,@PathVariable("localbodytype_id") int localbodytype_id)
+	public MasterResponse updateLocalbodytype(@RequestBody Localbodytype localbodytype,@PathVariable("localbodytype_id") int localbodytype_id)
 	{
 		return localbodytypeservice.updateLocalbodytype(localbodytype,localbodytype_id);
 	}

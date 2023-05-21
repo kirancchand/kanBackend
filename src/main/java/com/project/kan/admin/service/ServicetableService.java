@@ -23,27 +23,40 @@ public class ServicetableService {
 	@Autowired
 	private MyDao mydao;
 	
-	public Servicetable saveServicetable(@RequestBody Servicetable servicetable)
+	public MasterResponse saveServicetable(@RequestBody Servicetable servicetable)
 	{
 		Long a=mydao.queryForSave("master.service.add",new Object[] {servicetable.getService()});
-		if(a!=0)
-			return servicetable;
-			
-		else
-			return null;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(servicetable);
+        return masterResponse;
+//		if(a!=0)
+//			return servicetable;
+//			
+//		else
+//			return null;
 		
 	}
-	public List<Servicetable> getAllServicetable()
+	public MasterResponse getAllServicetable()
 	{
 		List<Servicetable> allServicetable=mydao.findAll("master.service.all", Servicetable.class);
-		 return allServicetable;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allServicetable);
+        return masterResponse;
 		
 	}
 	
-	public Object getServicetable(@PathVariable("service_id") int service_id)
+	public MasterResponse getServicetable(@PathVariable("service_id") int service_id)
 	{
 		Object myObject=mydao.findById("master.service.getById",new Object[]{service_id},Servicetable.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -56,11 +69,15 @@ public class ServicetableService {
 		return masterResponse;
 		
 	}
-	public Long updateServicetable(@RequestBody Servicetable servicetable,@PathVariable("service_id") int service_id)
+	public MasterResponse updateServicetable(@RequestBody Servicetable servicetable,@PathVariable("service_id") int service_id)
 	{
 	
 		long myObject=mydao.queryForUpdate("master.service.update",new Object[]{servicetable.getService(),service_id});
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(servicetable);
+        return masterResponse;
 		
 	}
 

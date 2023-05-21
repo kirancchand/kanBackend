@@ -21,24 +21,35 @@ public class EducationService {
     @Autowired
     private MyDao mydao;
     
-    public Education saveEducation(@RequestBody Education education)
+    public MasterResponse saveEducation(@RequestBody Education education)
     {
     	
         mydao.queryNameForUpdate("master.education.add",new Object[] {education.getSubject_id(), education.getQualification_id()});
-        return education;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(education);
+        return masterResponse;
     }
 
-    public List<Education> getAllEducation()
+    public MasterResponse getAllEducation()
 	{
-		List<Education> allEducation = mydao.findAll("master.education.all",Education.class);
-		 return allEducation;		
+		List<Education> allEducation = mydao.findAll("master.education.all",Education.class);MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allEducation);
+        return masterResponse;	
 	}
 	
   //Get by id..................//
-	public Object getEducation(@PathVariable("education_id") int education_id)
+	public MasterResponse getEducation(@PathVariable("education_id") int education_id)
 	{
 		Object myObject = mydao.findById("master.education.getById",new Object[]{education_id},Education.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
@@ -54,10 +65,15 @@ public class EducationService {
 		
 	}
 	
-	public void updateEducation(@RequestBody Education education,@PathVariable("education_id") int education_id)
+	public MasterResponse updateEducation(@RequestBody Education education,@PathVariable("education_id") int education_id)
 	{
 	
 		mydao.queryNameForUpdate("master.education.update", new Object[]{education.getSubject_id(), education.getQualification_id(), education_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(education);
+        return masterResponse;
 
 	}
 	

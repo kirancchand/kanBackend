@@ -23,38 +23,58 @@ public class LocalbodyService {
     @Autowired
     private MyDao mydao;
     
-    public Localbody saveLocalbody(@RequestBody Localbody localbody)
+    public MasterResponse saveLocalbody(@RequestBody Localbody localbody)
     {
     	
         mydao.queryNameForUpdate("master.localbody.add",new Object[] {localbody.getF_district_id(), localbody.getF_localbodytype_id(), localbody.getLocalbody_name()});
-        return localbody;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(localbody);
+        return masterResponse;
     }
 
-    public List<Localbody> getAllLocalbody()
+    public MasterResponse getAllLocalbody()
 	{
 		List<Localbody> allLocalbody = mydao.findAll("master.localbody.all",Localbody.class);
-		 return allLocalbody;		
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allLocalbody);
+        return masterResponse;	
 	}
 	
   //Get local body by criteria..................//
-	public Object getLocalbody(@PathVariable("localbody_id") int localbody_id)
+	public MasterResponse getLocalbody(@PathVariable("localbody_id") int localbody_id)
 	{
 		Object myObject = mydao.findById("master.localbody.getById",new Object[]{localbody_id},Localbody.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 		
 	}
 	
-	public List<Localbody> getLocalbodyByDistrict(@PathVariable("f_district_id") int f_district_id)
+	public MasterResponse getLocalbodyByDistrict(@PathVariable("f_district_id") int f_district_id)
 	{
 	    List<Localbody> byDistrict = mydao.findListById("master.localbody.getByDistrict",new Object[]{f_district_id},Localbody.class);
-		return byDistrict;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byDistrict);
+        return masterResponse;
 		
 	}
 	
-	public List<Localbody> getLocalbodyByLocalbodytype(@PathVariable("f_localbodytype_id") int f_localbodytype_id)
+	public MasterResponse getLocalbodyByLocalbodytype(@PathVariable("f_localbodytype_id") int f_localbodytype_id)
 	{
 	    List<Localbody> byLocalbodytype = mydao.findListById("master.localbody.getByLocalbodytype",new Object[]{f_localbodytype_id},Localbody.class);
-		return byLocalbodytype;
+	    MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(byLocalbodytype);
+        return masterResponse;
 		
 	}
 	
@@ -70,10 +90,14 @@ public class LocalbodyService {
 		
 	}
 	
-	public void updateLocalbody(@RequestBody Localbody localbody,@PathVariable("localbody_id") int localbody_id)
+	public MasterResponse updateLocalbody(@RequestBody Localbody localbody,@PathVariable("localbody_id") int localbody_id)
 	{
 	
 		mydao.queryNameForUpdate("master.localbody.update", new Object[]{localbody.getF_district_id(), localbody.getF_localbodytype_id(), localbody.getLocalbody_name(), localbody_id});
-
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(localbody);
+        return masterResponse;
 	}
 }

@@ -22,24 +22,36 @@ public class PrivilegeService {
     @Autowired
     private MyDao mydao;
 
-    public Privilege savePrivilege(@RequestBody Privilege privilege)
+    public MasterResponse savePrivilege(@RequestBody Privilege privilege)
     {
 
         mydao.queryNameForUpdate("master.privilege.add",new Object[] {privilege.getPrivilege()});
-        return privilege;
+        MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Added Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(privilege);
+        return masterResponse;
     }
 
-    public List<Privilege> getAllPrivilege()
+    public MasterResponse getAllPrivilege()
 	{
 		List<Privilege> allPrivilege = mydao.findAll("master.privilege.all",Privilege.class);
-		 return allPrivilege;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(allPrivilege);
+        return masterResponse;
 	}
 
 
-	public Object getPrivilege(@PathVariable("privilege_id") int privilege_id)
+	public MasterResponse getPrivilege(@PathVariable("privilege_id") int privilege_id)
 	{
 		Object myObject = mydao.findById("master.privilege.getById",new Object[]{privilege_id},Privilege.class);
-		return myObject;
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Listed Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(myObject);
+        return masterResponse;
 
 	}
 
@@ -55,10 +67,15 @@ public class PrivilegeService {
 
 	}
 
-	public void updatePrivilege(@RequestBody Privilege privilege,@PathVariable("privilege_id") int privilege_id)
+	public MasterResponse updatePrivilege(@RequestBody Privilege privilege,@PathVariable("privilege_id") int privilege_id)
 	{
 	
 		mydao.queryNameForUpdate("master.privilege.update", new Object[]{privilege.getPrivilege(), privilege_id});
+		MasterResponse masterResponse = new MasterResponse();
+        masterResponse.setMessage("Updated Successfully!!");
+        masterResponse.setStatus(200);
+        masterResponse.setData(privilege);
+        return masterResponse;
 
 	}
 }

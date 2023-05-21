@@ -31,14 +31,14 @@ public class QualificationController {
 	}
 
 	@PostMapping("/add")
-	public Qualification addQualification(@RequestBody Qualification qualification)
+	public MasterResponse addQualification(@RequestBody Qualification qualification)
 	{
 		return qualificationservice.saveQualification(qualification);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Qualification> getAllQualification()
+	public MasterResponse getAllQualification()
 	{
 		
 		return qualificationservice.getAllQualification();
@@ -46,7 +46,7 @@ public class QualificationController {
 	}
 	@RequestMapping("/get/{qualification_id}")
 	@ResponseBody
-	public Object getQualification(@PathVariable("qualification_id") int qualification_id)
+	public MasterResponse getQualification(@PathVariable("qualification_id") int qualification_id)
 	{
 		
 		return qualificationservice.getQualification(qualification_id);
@@ -62,7 +62,7 @@ public class QualificationController {
 	}
 	@PutMapping("/update/{qualification_id}")
 	@ResponseBody
-	public Long updateQualification(@RequestBody Qualification qualification,@PathVariable("qualification_id") int qualification_id)
+	public MasterResponse updateQualification(@RequestBody Qualification qualification,@PathVariable("qualification_id") int qualification_id)
 	{
 		return qualificationservice.updateQualification(qualification,qualification_id);
 	}

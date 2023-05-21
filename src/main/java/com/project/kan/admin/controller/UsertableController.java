@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.UsertableService;
 import com.project.kan.admin.vo.Usertable;
+import com.project.kan.common.vo.MasterResponse;
 
 @RestController
 @RequestMapping("/master/usertable")
@@ -29,14 +30,14 @@ public class UsertableController {
     }
 
     @PostMapping("/add")
-    public Usertable addUser(@RequestBody Usertable usertable)
+    public MasterResponse addUser(@RequestBody Usertable usertable)
     {
         return usertableservice.saveUser(usertable);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Usertable> getAllUser()
+	public MasterResponse getAllUser()
 	{
 		
 		return usertableservice.getAllUser();
@@ -44,7 +45,7 @@ public class UsertableController {
 	}
 	@RequestMapping("/get/{id}")
 	@ResponseBody
-	public Object getUser(@PathVariable("id") int id)
+	public MasterResponse getUser(@PathVariable("id") int id)
 	{
 		
 		return usertableservice.getUser(id);
@@ -54,17 +55,17 @@ public class UsertableController {
 	
 	@DeleteMapping("/delete/{id}")
 	@ResponseBody
-	public void deleteUser(@PathVariable("id") int id)
+	public MasterResponse deleteUser(@PathVariable("id") int id)
 	{
 		
-		usertableservice.deleteUser(id);
+		return usertableservice.deleteUser(id);
 		
 	}
 	@PutMapping("/update/{id}")
 	@ResponseBody
-	public void updateUser(@RequestBody Usertable usertable, @PathVariable("id") int id)
+	public MasterResponse updateUser(@RequestBody Usertable usertable, @PathVariable("id") int id)
 	{
-		 usertableservice.updateUser(usertable,id);
+		 return usertableservice.updateUser(usertable,id);
 	}
 
 }

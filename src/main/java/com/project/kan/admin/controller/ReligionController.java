@@ -32,14 +32,14 @@ public class ReligionController {
 	}
 
 	@PostMapping("/add")
-	public Religion addReligion(@RequestBody Religion religion)
+	public MasterResponse addReligion(@RequestBody Religion religion)
 	{
 		return religionservice.saveReligion(religion);
 	}
 	
 	@RequestMapping("/getAll")
 	@ResponseBody
-	public List<Religion> getAllReligion()
+	public MasterResponse getAllReligion()
 	{
 		
 		return religionservice.getAllReligion();
@@ -48,7 +48,7 @@ public class ReligionController {
 	
 	@RequestMapping("/get/{religion_id}")
 	@ResponseBody
-	public Object getReligion(@PathVariable("religion_id") int religion_id)
+	public MasterResponse getReligion(@PathVariable("religion_id") int religion_id)
 	{
 		
 		return religionservice.getReligion(religion_id);
@@ -66,7 +66,7 @@ public class ReligionController {
 	
 	@PutMapping("/update/{religion_id}")
 	@ResponseBody
-	public Long updateReligion(@RequestBody Religion religion, @PathVariable("religion_id") int religion_id)
+	public MasterResponse updateReligion(@RequestBody Religion religion, @PathVariable("religion_id") int religion_id)
 	{
 		return religionservice.updateReligion(religion, religion_id);
 	}

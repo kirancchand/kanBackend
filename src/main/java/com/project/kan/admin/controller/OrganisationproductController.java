@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.kan.admin.service.OrganisationproductService;
 import com.project.kan.admin.vo.Organisationproduct;
+import com.project.kan.common.vo.MasterResponse;
 
 
 @RestController
@@ -30,14 +31,14 @@ public class OrganisationproductController {
     }
 
     @PostMapping("/add")
-    public Organisationproduct addOrganisationproduct(@RequestBody Organisationproduct organisationproduct)
+    public MasterResponse addOrganisationproduct(@RequestBody Organisationproduct organisationproduct)
     {
         return organisationproductservice.saveOrganisationproduct(organisationproduct);
     }
 
     @RequestMapping("/getAll")
 	@ResponseBody
-	public List<Organisationproduct> getAllOrganisationproduct()
+	public MasterResponse getAllOrganisationproduct()
 	{
 
 		return organisationproductservice.getAllOrganisationproduct();
@@ -45,7 +46,7 @@ public class OrganisationproductController {
 	}
 	@RequestMapping("/get/{organisation_product_id}")
 	@ResponseBody
-	public Object getOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
+	public MasterResponse getOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
 	{
 
 		return organisationproductservice.getOrganisationproduct(organisation_product_id);
@@ -55,17 +56,17 @@ public class OrganisationproductController {
 
 	@DeleteMapping("/delete/{organisation_product_id}")
 	@ResponseBody
-	public void deleteOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
+	public MasterResponse deleteOrganisationproduct(@PathVariable("organisation_product_id") int organisation_product_id)
 	{
 
-		organisationproductservice.deleteOrganisationproduct(organisation_product_id);
+		return organisationproductservice.deleteOrganisationproduct(organisation_product_id);
 
 	}
 	@PutMapping("/update/{organisation_product_id}")
 	@ResponseBody
-	public void updateOrganisationproduct(@RequestBody Organisationproduct organisationproduct, @PathVariable("organisation_product_id") int organisation_product_id)
+	public MasterResponse updateOrganisationproduct(@RequestBody Organisationproduct organisationproduct, @PathVariable("organisation_product_id") int organisation_product_id)
 	{
-		 organisationproductservice.updateOrganisationproduct(organisationproduct, organisation_product_id);
+		return organisationproductservice.updateOrganisationproduct(organisationproduct, organisation_product_id);
 	}
 
 }
