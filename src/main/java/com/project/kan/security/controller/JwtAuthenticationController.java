@@ -17,6 +17,7 @@ import com.project.kan.security.config.JwtTokenUtil;
 import com.project.kan.security.vo.JwtRequest;
 import com.project.kan.security.vo.JwtResponse;
 import com.project.kan.security.service.JwtUserDetailsService;
+import com.project.kan.security.vo.Users;
 
 @RestController
 @CrossOrigin
@@ -31,11 +32,11 @@ private JwtTokenUtil jwtTokenUtil;
 private JwtUserDetailsService userDetailsService;
 
 @RequestMapping(value = "/login", method = RequestMethod.POST)
-public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+public ResponseEntity<?> createAuthenticationToken(@RequestBody Users authenticationRequest) throws Exception {
 
-	authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+	authenticate(authenticationRequest.getEmail_id(), authenticationRequest.getPassword());
 //	final UserDetails userDetails = userDetailsService.getUserDetails(authenticationRequest.getUsername(),authenticationRequest.getPassword());
-	final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+	final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail_id());
 	
 	final String token = jwtTokenUtil.generateToken(userDetails);
 	
@@ -43,8 +44,8 @@ public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authe
 }
 
 @RequestMapping(value = "/register", method = RequestMethod.POST)
-public ResponseEntity<?> registerUser(@RequestBody JwtRequest jwtRequest) throws Exception {
-	return ResponseEntity.ok(userDetailsService.registerUser(jwtRequest));
+public ResponseEntity<?> registerUser(@RequestBody Users users) throws Exception {
+	return ResponseEntity.ok(userDetailsService.registerUser(users));
 }
 
 private void authenticate(String username, String password) throws Exception {

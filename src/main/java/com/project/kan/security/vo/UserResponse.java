@@ -2,13 +2,13 @@ package com.project.kan.security.vo;
 import com.project.kan.security.vo.JwtResponse;
 public class UserResponse {
 	
-	private JwtRequest data;
+	private Users data;
 	private String message;
 	private int status;
-	public JwtRequest getData() {
+	public Users getData() {
 		return data;
 	}
-	public void setData(JwtRequest data) {
+	public void setData(Users data) {
 		this.data = data;
 	}
 	public String getMessage() {
