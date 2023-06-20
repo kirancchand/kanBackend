@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,12 @@ public class AreaService {
     private MyDao mydao;
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public MasterResponse saveArea(@RequestBody Area area)
     {
+        mongoTemplate.save(area);
         mydao.queryNameForUpdate("master.area.add",new Object[] {area.getArea(),area.getF_region_id(),area.getF_localbodytype_id()});
         MasterResponse masterResponse = new MasterResponse();
         masterResponse.setMessage("Added Successfully!!");
@@ -45,6 +49,9 @@ public class AreaService {
 
     public MasterResponse getAllArea()
 	{
+//        mongoTemplate.save(area);
+        List<Area> listAllMongo = mongoTemplate.findAll(Area.class);
+        
 		List<Area> allArea=mydao.findAll("master.area.all",Area.class);
 		 MasterResponse masterResponse = new MasterResponse();
          masterResponse.setMessage("Listed Successfully!!");
